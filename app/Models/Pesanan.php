@@ -18,6 +18,6 @@ class Pesanan extends Model
 
     public function DetailPesanan()
     {
-        return $this->belongsTo(DetailPesanan::class);
+        return $this->hasMany(DetailPesanan::class, 'pesanan_id');
     }
 }

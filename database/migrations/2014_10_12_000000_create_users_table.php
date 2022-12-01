@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('alamat');
             $table->double('no_hp');
+            $table->enum('status', ['admin', 'user']);
             $table->rememberToken();
             $table->timestamps();
         });
