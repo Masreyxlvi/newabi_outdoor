@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPesanan;
 use App\Models\Kategori;
+use App\Models\Pesanan;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 
@@ -10,9 +12,12 @@ class ProduksController extends Controller
 {
     public function index()
     {
-        $produks = Produk::paginate(9);
-        $kategoris = Kategori::all();
-        return view('products' , compact('produks', 'kategoris' ) );
+        
+        return view('products' ,[
+            "produks" => Produk::with('kategori')->latest()->get(),
+            // "kategoris" => Kategori::all(),
+            "title" => "PRODUCT HIGHLIGHTS",
+        ] );
     }
 
     public function show(Produk $produk)
@@ -21,4 +26,6 @@ class ProduksController extends Controller
             'produk' => $produk
         ]);
     }
+
+   
 }

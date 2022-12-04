@@ -18,6 +18,7 @@ class CreateDetailPesanansTable extends Migration
             $table->foreignId('produk_id');
             $table->foreignId('pesanan_id');
             $table->integer('qty');
+            $table->integer('lama_pesan');
             $table->bigInteger('jumlah_harga');
             $table->timestamps();
         });

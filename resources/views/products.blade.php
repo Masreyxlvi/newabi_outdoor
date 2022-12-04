@@ -3,7 +3,7 @@
 @section('main')
 <div class="container">
 	<section id="gallery" class="mb-120">
-		<h2>PRODUCT HIGHLIGHTS</h2>
+		<h2>{{ $title }}</h2>
 		<div class="row">
 			<div class="col-md-6">
 				<nav aria-label="breadcrumb link">
@@ -41,11 +41,7 @@
 					</div>
 				</div>
 				@endforeach
-		
-				{{-- <!-- Button CTA -->
-				<div class="w-100 d-flex justify-content-center align-items-center">
-					<a href="/products" class="btn-cta">Jelajahi lebih banyak...</a>
-				</div> --}}
+
 			</div>
 		</div>
 	</section>

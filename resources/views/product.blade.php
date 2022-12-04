@@ -40,58 +40,57 @@
 			<div class="col-lg-6">
 				{{-- <div class="card card-body"> --}}
 				<div class="product_detail">
-					<h2>{{ $produk->nama_produk }}</h2>
+					<div class="d-flex justify-content-between align-items-center">
+						<h2>{{ $produk->nama_produk }}</h2>
+						<h5 class="text-muted">Stok {{ $produk->stok }}</h5>
+					</div>
 					<h4>Rp. {{ number_format($produk->harga) }} Per Unit</h4>
 					<p>{{ $produk->keterangan }}</p>
 				</div>
 				<div class="trancation">
 					<div class="card">
-						<div class="card-header text-center">
+						<div class="card-header text-center bg-dark text-white">
 							<h6>Pesan Sekarang</h6>
 						</div>
 						<div class="card-body">
-							<form>
-								<div class="mb-3">
-									<label for="exampleInputEmail1" class="form-label">Email address</label>
-									<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-									<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-								</div>
-								<div class="mb-3">
-									<label for="exampleInputPassword1" class="form-label">Password</label>
-									<input type="password" class="form-control" id="exampleInputPassword1">
-								</div>
-								<div class="mb-3">
-									<div class="form-check form-check-inline">
-										<input type="radio" name="dibayar" value="belum_dibayar" id="belum_dibayar"
-										hidden >
-										<label for="belum_dibayar">
-											<div class="card mb-0">
-												 <div class="card-body">
-														<span >Bawa Sendiri</span>
-														<div class="float-end px-1 py-1">
-															<i class="fas fa-check-circle"></i>
-														</div>
-												 </div>
+							<form method="post" action="/products/{{ $produk->nama_produk }}">
+								@csrf
+								<div class="row">	
+									<div class="col-md-6">
+										@if($errors->any())
+											<div class="alert alert-danger" role="alert" id="error-alert">
+												<button type="button" class="close" data-dismiss="alert" aria-label="close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												<ul>
+													@foreach ($errors->all() as $error)
+														<li>{{ $error }}</li>
+													@endforeach
+												</ul>
 											</div>
-										</label>
+											@endif
+										<div class="mb-3">
+											<label for="tanggal" class="form-label">Tanggal Pesanan</label>
+											<input type="date" class="form-control"name="tgl_pesan" id="tanggal" required>
+										</div>
+										<div class="mb-3">
+											<label for="lama_pesan" class="form-label">Batas Waktu</label>
+											<input type="date" class="form-control" placeholder="1 Hari" name="batas_waktu" id="lama_pesan">
+										</div>
 									</div>
-									<div class="form-check form-check-inline">
-										<input type="radio" name="dibayar" value="dibayar" id="dibayar"
-										hidden >
-										<label for="dibayar">
-											<div class="card mb-0">
-												 <div class="card-body">
-														<span>Menggunakan Jasa Antar</span>
-														<div class="float-end px-1 py-1">
-															<i class="fas fa-check-circle"></i>
-														</div>
-												 </div>
-											</div>
-										</label>
+									<div class="col-md-6">
+										<label for="lama_pesan" class="form-label">Lama Penyewaan</label>
+										<div class="input-group mb-3">
+											<input type="number" class="form-control" placeholder="1" name="lama_pesan">
+											<span class="input-group-text" id="basic-addon1">Hari</span>
+										</div>
+										<div class="mb-4">
+											<label for="lama_pesan" class="form-label">Qty</label>
+											<input type="number" class="form-control" placeholder="0" name="qty" id="lama_pesan">
+										</div>
 									</div>
-
+									<button type="submit" class="btn btn-success"><i class="fa-solid fa-cart-plus"></i> Masukan Keranjang</button>
 								</div>
-								<button type="submit" class="btn btn-primary">Submit</button>
 							</form>
 							
 						</div>

@@ -11,14 +11,16 @@ class CategoriesController extends Controller
     public function index()
     {
         // $produks = Produk::paginate(9);
-        $kategoris = Kategori::all();
-        return view('categories' , compact('kategoris' ) );
+        // $kategoris = Kategori::all();
+        return view('categories', [
+            "kategoris" => Kategori::all()
+        ]);
     }
 
     public function show(Kategori $kategori)
     {
-        return view('categori', [
-            'kategori' => $kategori->nama_kategori,
+        return view('products', [
+            'title' => "Category $kategori->nama_kategori",
             'produks' => $kategori->produks
         ]);
     }

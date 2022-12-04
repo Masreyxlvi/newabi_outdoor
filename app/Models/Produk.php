@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use app\Models\Kategori;
+// use app\Models\Kategori;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

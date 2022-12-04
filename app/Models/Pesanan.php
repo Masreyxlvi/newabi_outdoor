@@ -20,4 +20,11 @@ class Pesanan extends Model
     {
         return $this->hasMany(DetailPesanan::class, 'pesanan_id');
     }
+
+    public static function createInvoice()
+    {
+        $lastNumber = self::selectRaw("IFNULL(MAX(SUBSTRING(`kode_pesanan`,9,5)),0) + 1 AS last_number")->whereRaw("SUBSTRING(`kode_pesanan`,1,4) = '" . date('Y') . "'")->whereRaw("SUBSTRING(`kode_pesanan`,5,2) = '" . date('m') . "'")->orderBy('last_number')->first()->last_number;
+        $invoice =  date("Ymd") . sprintf("%'.05d", $lastNumber);
+        return $invoice;
+    } 
 }

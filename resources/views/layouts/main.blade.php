@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css" />
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/responsive.css" />
+    {{-- icons  Awesome--}}
+    <link rel="stylesheet" href="{{ asset('assets') }}/build/font-awesome/css/all.css" />
+
     @stack('head')
 
     <title>NEWABI OUTDOOR | Home</title>
@@ -31,6 +34,9 @@
     <!-- Main Content -->
     <main>
 			@yield('main')
+      <a class="wafixed" href="https://wa.me/62823928XXX" target="_blank" >
+        <i class="fa-solid fa-cart-shopping text-success fs-2"></i>
+      </a>
     </main>
 
     <!-- Footer Section -->
@@ -40,5 +46,7 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <script src="{{ asset('assets') }}/build/font-awesome/js/all.js"></script>
   </body>
 </html>

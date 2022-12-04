@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProduksController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,4 @@ Route::get('/categories', [CategoriesController::class , 'index']);
 
 Route::get('/products/{produk:nama_produk}', [ProduksController::class , 'show']);
 Route::get('/categories/{kategori:nama_kategori}', [CategoriesController::class , 'show']);
+Route::post('/products/{produk:nama_produk}', [PesananController::class , 'store']);
