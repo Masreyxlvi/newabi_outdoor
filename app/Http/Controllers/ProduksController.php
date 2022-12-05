@@ -15,7 +15,6 @@ class ProduksController extends Controller
         
         return view('products' ,[
             "produks" => Produk::with('kategori')->latest()->get(),
-            // "kategoris" => Kategori::all(),
             "title" => "PRODUCT HIGHLIGHTS",
         ] );
     }

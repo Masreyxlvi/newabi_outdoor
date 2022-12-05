@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class PesananController extends Controller
 {
+
     public function store(Request $request, Produk $produk)
     {
         $produks = Produk::where('nama_produk', $produk->nama_produk)->first();
@@ -65,7 +66,30 @@ class PesananController extends Controller
         $pesanan->total_bayar = $pesanan->total_bayar+$produks->harga*$request->lama_pesan*$request->qty;
         $pesanan->update();
 
-        return redirect()->back();  
+        return redirect('/check_out')->with('succes', 'Pesanan Masuk Keranjang');  
         
+    }
+
+    public function check_out()
+    {
+        $pesanan = Pesanan::where('status', "belum_checkout")->first(); 
+        $produks = Produk::all(); 
+        $DetailPesanans = DetailPesanan::where('pesanan_id', $pesanan->id)->get();
+        
+        return view('/check_out', compact(['pesanan', 'DetailPesanans', 'produks']));
+    }
+
+    public function delete($id)
+    {
+        $detail_pesanan = DetailPesanan::where('id', $id)->first();
+
+        $pesanan = Pesanan::where('id', $detail_pesanan->pesanan_id)->first();
+        $pesanan->total_bayar = $pesanan->total_bayar-$detail_pesanan->jumlah_harga;
+        $pesanan->update();
+
+        $detail_pesanan->delete();
+
+        return redirect('/check_out')->with('hapus', 'Pesanan Masuk Keranjang');  
+
     }
 }

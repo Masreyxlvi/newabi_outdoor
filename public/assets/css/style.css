@@ -124,12 +124,6 @@ nav .navbar-flex .navigation-social-media a img {
     border-radius: 50%;
 }
 
-.wafixed i {
-    /* font-size: 50px; */
-    /* color: white; */
-    /* background-color: #2b2b2b; */
-}
-
 /* MAIN - Hero Content */
 #hero {
     /* background: coral; */
@@ -327,7 +321,7 @@ nav .navbar-flex .navigation-social-media a img {
     text-transform: uppercase;
 }
 
-.my-works .btn-ctb {
+.btn-ctb {
     border-radius: 16px;
     padding: 5px 20px;
     background-color: transparent;
@@ -340,7 +334,7 @@ nav .navbar-flex .navigation-social-media a img {
     transition: all 0.1s ease-in-out;
 }
 
-.my-works .btn-cta {
+.btn-cta {
     border-radius: 16px;
     padding: 20px 60px;
     background-color: transparent;
@@ -353,12 +347,12 @@ nav .navbar-flex .navigation-social-media a img {
     transition: all 0.1s ease-in-out;
 }
 
-.my-works .btn-ctb:hover {
+.btn-ctb:hover {
     background-color: var(--dark-100);
     color: var(--gray-25);
     transition: all 0.1s ease-in-out;
 }
-.my-works .btn-cta:hover {
+.btn-cta:hover {
     background-color: var(--dark-100);
     color: var(--gray-25);
     transition: all 0.1s ease-in-out;
@@ -578,6 +572,96 @@ nav .navbar-flex .navigation-social-media a img {
 }
 
 #contact .card-form .custom-form .btn-kontak:hover {
+    background-color: var(--dark-100);
+    transition: 0.3s all ease-in-out;
+}
+
+.trancation .card-form {
+    height: 686px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 24px;
+    position: relative;
+}
+
+.trancation .card-form .accent-pills {
+    width: 286px;
+    height: 40px;
+    border-radius: 24px;
+    background-color: #545454;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.trancation .card-form .accent-pills p {
+    line-height: 40px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.trancation .card-form .custom-form {
+    width: auto;
+    height: 100%;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+}
+
+.trancation .card-form .custom-form .controlled-form {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    /* background-color: coral; */
+}
+
+.trancation .card-form .custom-form .controlled-form .custom-label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.trancation .card-form .custom-form .controlled-form .custom-input {
+    border-radius: 8px;
+    padding: 20px;
+    color: #000;
+    font-size: 18px;
+    border: none;
+    background-color: #d9d9d9;
+    height: 48px;
+}
+
+.trancation .card-form .custom-form .controlled-form .custom-textarea {
+    resize: none;
+    border-radius: 8px;
+    padding: 20px;
+    color: #000;
+    font-size: 18px;
+    border: none;
+    background-color: #d9d9d9;
+    height: 128px;
+}
+
+.trancation .card-form .custom-form .btn-kontak {
+    width: 50%;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    background-color: var(--dark-75);
+    color: #fff;
+    font-weight: 500;
+    height: 42px;
+    transition: 0.3s all ease-in-out;
+}
+
+.trancation .card-form .custom-form .btn-kontak:hover {
     background-color: var(--dark-100);
     transition: 0.3s all ease-in-out;
 }

@@ -1,9 +1,20 @@
 @extends('layouts.main')
-@push('head')
-<link href="{{ asset('assets') }}/css/pengambilan_barang.css" rel="stylesheet">
-@endpush
 @section('main')
 
+				@if($errors->any())
+					<div class="alert alert-danger" role="alert" id="error-alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+					@endif
+
+				
 <div class="container">
 	<section id="product">
 		<div class="row justify-content-between">
@@ -48,57 +59,56 @@
 					<p>{{ $produk->keterangan }}</p>
 				</div>
 				<div class="trancation">
-					<div class="card">
-						<div class="card-header text-center bg-dark text-white">
-							<h6>Pesan Sekarang</h6>
-						</div>
-						<div class="card-body">
-							<form method="post" action="/products/{{ $produk->nama_produk }}">
+					<div class="col-lg-12">
+						<div class="card-form">
+							<div class="accent-pills mt-5">
+								<p>Pesan Sekarang</p>
+							</div>
+							<form action="/products/{{ $produk->nama_produk }}" method="post" class="custom-form">
 								@csrf
-								<div class="row">	
-									<div class="col-md-6">
-										@if($errors->any())
-											<div class="alert alert-danger" role="alert" id="error-alert">
-												<button type="button" class="close" data-dismiss="alert" aria-label="close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-												<ul>
-													@foreach ($errors->all() as $error)
-														<li>{{ $error }}</li>
-													@endforeach
-												</ul>
-											</div>
-											@endif
-										<div class="mb-3">
-											<label for="tanggal" class="form-label">Tanggal Pesanan</label>
-											<input type="date" class="form-control"name="tgl_pesan" id="tanggal" required>
-										</div>
-										<div class="mb-3">
-											<label for="lama_pesan" class="form-label">Batas Waktu</label>
-											<input type="date" class="form-control" placeholder="1 Hari" name="batas_waktu" id="lama_pesan">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<label for="lama_pesan" class="form-label">Lama Penyewaan</label>
-										<div class="input-group mb-3">
-											<input type="number" class="form-control" placeholder="1" name="lama_pesan">
-											<span class="input-group-text" id="basic-addon1">Hari</span>
-										</div>
-										<div class="mb-4">
-											<label for="lama_pesan" class="form-label">Qty</label>
-											<input type="number" class="form-control" placeholder="0" name="qty" id="lama_pesan">
-										</div>
-									</div>
-									<button type="submit" class="btn btn-success"><i class="fa-solid fa-cart-plus"></i> Masukan Keranjang</button>
+								<div class="controlled-form mb-4">
+									<label class="custom-label"  for="tgl_pesan">Tanggal Pesanan :</label>
+									<input type="text" readonly data-toggle="datepicker" class="custom-input" name="tgl_pesan" id="tgl_pesan" />
+								</div>
+								<div class="controlled-form mb-4">
+									<label class="custom-label" for="qty">Qty :</label>
+									<input type="number"  class="custom-input" name="qty" id="qty" />
+								</div>
+								<div class="controlled-form mb-4">
+									<label class="custom-label" for="lama_pesan">Lama Pesanan</label>
+									<input type="number" class="custom-input" name="lama_pesan" id="lama_pesan" />
+								</div>
+								<div class="controlled-form mb-4">
+									<label class="custom-label" for="nama">Batas Waktu :</label>
+									<input type="text" readonly data-toggle="datepicker" class="custom-input" name="batas_waktu" id="batas_waktu" />
+								</div>
+								<div class="controlled-form">
+									<button class="btn-kontak align-self-end" type="submit">Masukan Keranjang</button>
 								</div>
 							</form>
-							
 						</div>
 					</div>
 				</div>
-				{{-- </div> --}}
+				
 			</div>
 		</div>
 	</section>
 </div>
 @endsection
+
+@push('script')
+	<script>
+		$('[data-toggle="datepicker"]').datepicker({
+			format: 'yyyy-mm-dd',
+			autoHide: true,
+		});
+
+		Date.prototype.toDateInputValue = (function() {
+						var local = new Date(this);
+						local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+						return local.toJSON().slice(0,10);
+					}); 
+				$('#tgl_pesan').val(new Date().toDateInputValue());
+
+	</script>
+@endpush

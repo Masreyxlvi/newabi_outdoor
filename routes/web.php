@@ -25,6 +25,8 @@ Route::get('/', [HomeController::class , 'index']);
 
 Route::get('/products', [ProduksController::class , 'index']);
 Route::get('/categories', [CategoriesController::class , 'index']);
+Route::get('/check_out', [PesananController::class , 'check_out']);
+Route::delete('/check_out/{id}', [PesananController::class , 'delete']);
 
 Route::get('/products/{produk:nama_produk}', [ProduksController::class , 'show']);
 Route::get('/categories/{kategori:nama_kategori}', [CategoriesController::class , 'show']);
