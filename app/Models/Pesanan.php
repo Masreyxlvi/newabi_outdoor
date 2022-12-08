@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Pesanan extends Model
 {
@@ -27,4 +28,9 @@ class Pesanan extends Model
         $invoice =  date("Ymd") . sprintf("%'.05d", $lastNumber);
         return $invoice;
     } 
+
+    public function getTglPesanAttribute()
+    {
+        return Carbon::parse($this->attributes['tgl_pesan'])->translatedFormat('l, d F Y');
+    }
 }

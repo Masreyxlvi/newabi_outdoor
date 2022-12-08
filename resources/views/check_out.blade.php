@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@push('head')
+<link rel="stylesheet" href="{{ asset('assets') }}/css/lokasi.css">
+@endpush
+
 @section('main')
 
 	@if(session()->has('succes'))
@@ -20,7 +24,7 @@
 		<script>								
 				Swal.fire({
 				icon: 'success',
-				title: 'Pesanan Anda Di Cancel',
+				title: 'Pesanan Berhasil Di Cancel',
 				showConfirmButton: false,
 				timer: 2000
 				})
@@ -30,11 +34,15 @@
 
 	<div class="container">
 		<section id="gallery">
-			<a href="/products/" class="btn-ctb">Tambah Pesanan</a>
+			<div class="mb-2">
+				<a href="/products/" class="btn-ctb">Tambah Pesanan</a>
+			</div>
 			<h2>Detail Pesanan Anda</h2>
+			@if(!empty($pesanan))
+			<p align="right">Tanggal Pesanan : {{ $pesanan->tgl_pesan  }}</p>
 			<div class="row">
 				<div class="col-md-12">
-					<table class="table">
+					<table class="table table-responsive-md">
 						<thead>
 							<tr>
 								<th scope="col">#</th>
@@ -52,12 +60,12 @@
 								<td>{{ $detailPesanan->produk->nama_produk }}</td>
 								<td>{{ $detailPesanan->qty }}</td>
 								<td>Rp. {{ number_format($detailPesanan->produk->harga) }}</td>
-								<td>Rp. {{number_format($detailPesanan->jumlah_harga) }}</td>
+								<td align="center">Rp. {{number_format($detailPesanan->jumlah_harga) }}</td>
 								<td>
 									<form action="/check_out/{{ $detailPesanan->id }}" method="POST" class="d-inline">
 										@csrf
 										@method('DELETE')
-										<button type="submit" class="btn btn-danger delete"><i class="fa-solid fa-trash"></i></button>
+										<button type="submit" class="btn btn-danger btn-sm delete"><i class="fa-solid fa-trash"></i></button>
 									</form>
 								</td>
 							</tr>
@@ -67,22 +75,105 @@
 				</div>
 				<div class="col-md-12">
 					<div class="pull-right text-end">
-						<hr />
+						{{-- <hr /> --}}
 						<h5><b>Total Pembayaran : </b>Rp. {{ number_format($pesanan->total_bayar ) }}</h5>
 					</div>
 					<div class="clearfix"></div>    
 					<hr />
 					<div class="text-end no-print">
-							<a class="btn btn-danger "  href="/transaksi">
-								Proceed to payment
-							</a>
-								<a href="dashboard/transaksi/faktur_print" rel="noopener" target="_blank" onclick="window.print();" class="btn btn-primary"><i
-									class="fas fa-print"></i> 
-									Print
-							</a>
+														<!-- Button trigger modal -->
+							<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+								<i class="fa-solid fa-cart-shopping"></i> Check Out
+							</button>
+					</div>
+					@endif 
+						<!-- Modal Alamat  -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Lokasi Pengiriman</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<div class="col-lg-12">
+												<form action="/konfirmasi" method="post">
+													@csrf
+													<div class="mb-1">
+														<label for="dibayar" class="col-form-label"><b> Plilh lokasi </b></label>
+													</div>
+												<div class="form-check form-check-inline">
+													<input type="radio" name="lokasi" value="jasa_antar" id="jasa_antar"
+													hidden >
+													<label for="jasa_antar">
+														<div class="card mb-0">
+															 <div class="card-body">
+																	<span >Menggunakan Jasa Antar</span>
+																	<div class="float-end px-1 py-1">
+																		<i class="fas fa-check-circle"></i>
+																	</div>
+																</div>
+															</div>
+														</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input type="radio" name="lokasi" value="lokasi" id="lokasi"
+														hidden >
+														<label for="lokasi">
+															<div class="card mb-0">
+																<div class="card-body">
+																	<span>Datang Ke Lokasi</span>
+																	<div class="float-end px-1 py-1">
+																		<i class="fas fa-check-circle"></i>
+																		</div>
+																 </div>
+															</div>
+														</label>
+												</div>
+												<div class="mt-3">
+													<label for="alamat" class="form-label"><b>Alamat</b></label>
+													<div id="emailHelp" class="form-text">Isi alamat Sesuai yang Ada di google maps</div>
+													<textarea class="form-control" name="alamat" readonly id="alamat" rows="3"></textarea>
+												</div>
+												<div class="mt-3">
+													<label for="alamat" class="form-label"><b>Jaminan</b></label>
+													<select class="form-select" aria-label="Default select example" name="jaminan">
+														<option selected disabled>Pilih Barang Sebagai Jaminan</option>
+														<option value="ktp">KTP</option>
+														<option value="kartu pelajar">Kartu Pelajar</option>
+														<option value="sim">SIM</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-success">  <i class="fa-solid fa-cart-shopping"></i>Pesan Sekarang</button>
+									</div>
+								</div>
+							</form>
+							</div>
 					</div>
 				</div>
 			</div>
 		</section>
 	</div>
 @endsection
+@push('script')
+	<script>
+			$('[name="lokasi"]').on('change', function() {
+				if ($(this).val() == 'lokasi') {
+					// alert('lokasi')
+					var alamat = "Jln Baros Gg H Sulaeman Desa Sukataris Kec. Karangtengah Cianjur";
+					$('#alamat').val(alamat);
+					$('#alamat').attr('readonly', true)
+				}else{
+					var alamat = ""
+					$('#alamat').attr('readonly', false)
+					$('#alamat').val(alamat);
+				}
+			});
+	</script>
+@endpush

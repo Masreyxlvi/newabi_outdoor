@@ -17,6 +17,8 @@ class PesananController extends Controller
         $validate = $request->validate([
             'tgl_pesan' => 'required|date',
             'batas_waktu' => 'required|date',
+            'alamat' => 'nullable',
+            'jaminan' => 'nullable',
         ]);      
       
         $cek_pesanan_baru = Pesanan::where('status', 'belum_checkout')->first();
@@ -73,10 +75,11 @@ class PesananController extends Controller
     public function check_out()
     {
         $pesanan = Pesanan::where('status', "belum_checkout")->first(); 
-        $produks = Produk::all(); 
-        $DetailPesanans = DetailPesanan::where('pesanan_id', $pesanan->id)->get();
+        if(!empty($pesanan)) {
+            $DetailPesanans = DetailPesanan::where('pesanan_id', $pesanan->id)->get();
+        }
         
-        return view('/check_out', compact(['pesanan', 'DetailPesanans', 'produks']));
+        return view('/check_out', compact(['pesanan', 'DetailPesanans']));
     }
 
     public function delete($id)
@@ -91,5 +94,24 @@ class PesananController extends Controller
 
         return redirect('/check_out')->with('hapus', 'Pesanan Masuk Keranjang');  
 
+    }
+
+    public function konfirmasi(Request $request)
+    {
+        $pesanan = Pesanan::where('status', "belum_checkout")->first();
+        $pesanan_id = $pesanan->id;
+        $pesanan->status = "sudah_checkout";
+        $pesanan->alamat = $request->alamat;
+        $pesanan->jaminan = $request->jaminan;
+        $pesanan->update();
+
+        $detail_pesanans = DetailPesanan::where('pesanan_id', $pesanan_id)->get();
+        foreach ($detail_pesanans as $detail_pesanan) {
+            $produk = Produk::where('id', $detail_pesanan->produk_id)->first();
+            $produk->stok = $produk->stok-$detail_pesanan->qty;
+            $produk->update(); 
+        }
+
+        return redirect('/products')->with('succes', 'Pesanan Masuk Keranjang');  
     }
 }

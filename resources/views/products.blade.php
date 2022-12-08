@@ -1,6 +1,19 @@
 @extends('layouts.main')
 
 @section('main')
+@if(session()->has('succes'))
+	@push('script')
+		<script>								
+				Swal.fire({
+				icon: 'success',
+				title: 'Pesanan Anda Sedang Diproses',
+				showConfirmButton: false,
+				timer: 2000
+				})
+		</script>
+	@endpush
+	@endif
+
 <div class="container">
 	<section id="gallery" class="mb-120">
 		<h2>{{ $title }}</h2>

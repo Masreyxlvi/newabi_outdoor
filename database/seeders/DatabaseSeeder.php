@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Produk::create([
-            'nama_produk' => 'Sleeping Bad',
+            'nama_produk' => 'Sleeping Bag',
             'kategori_id' => '2',
             'harga' => '8000',
             'stok' => '5',

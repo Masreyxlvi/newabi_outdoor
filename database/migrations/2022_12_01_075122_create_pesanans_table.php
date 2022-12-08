@@ -20,6 +20,8 @@ class CreatePesanansTable extends Migration
             $table->date('tgl_pesan');
             $table->date('batas_waktu');
             $table->bigInteger('total_bayar');
+            $table->text('alamat')->nullable();
+            $table->string('jaminan')->nullable();
             $table->enum('status', ['sudah_checkout', 'belum_checkout']);
             $table->timestamps();
         });
