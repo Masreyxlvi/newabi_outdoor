@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/build/sweetalert2/sweetalert2.min.css" />
     {{-- Datepicker --}}
     <link rel="stylesheet" href="{{ asset('assets') }}/build/datepicker/datepicker.css" />
+    {{-- bootstrap icons --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
 
     @stack('head')
@@ -66,6 +68,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <script src="{{ asset('assets') }}/build/sweetalert2/sweetalert2.min.js"></script>
+    <script src="{{ asset('assets') }}/build/sweetalert/sweetalert.min.js"></script>
     <script src="{{ asset('assets') }}/build/font-awesome/js/all.min.js"></script>
     {{-- datepicker --}}
     <script src="{{ asset('assets') }}/build/jquery/jquery.js"></script>

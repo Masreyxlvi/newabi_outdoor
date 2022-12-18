@@ -24,13 +24,24 @@ class Pesanan extends Model
 
     public static function createInvoice()
     {
-        $lastNumber = self::selectRaw("IFNULL(MAX(SUBSTRING(`kode_pesanan`,9,5)),0) + 1 AS last_number")->whereRaw("SUBSTRING(`kode_pesanan`,1,4) = '" . date('Y') . "'")->whereRaw("SUBSTRING(`kode_pesanan`,5,2) = '" . date('m') . "'")->orderBy('last_number')->first()->last_number;
-        $invoice =  date("Ymd") . sprintf("%'.05d", $lastNumber);
+        // $lastNumber = self::selectRaw("IFNULL(MAX(SUBSTRING(`kode_pesanan`,9,5)),0) + 1 AS last_number")->whereRaw("SUBSTRING(`kode_pesanan`,1,4) = '" . date('Y') . "'")->whereRaw("SUBSTRING(`kode_pesanan`,5,2) = '" . date('m') . "'")->orderBy('last_number')->first()->last_number;
+        // $invoice =  date("Ymd") . sprintf("%'.05d", $lastNumber);
+        // return $invoice;
+
+        $tahun = date("Y");
+        $prefix = strtoupper(substr("NWB", 0, 3));
+        $no_urut = self::selectRaw("IFNULL(MAX(SUBSTRING(`kode_pesanan`,8,4)),0) + 1 AS no_urut")->whereRaw("SUBSTRING(`kode_pesanan`,4,4) = '" . $tahun . "'")->whereRaw("SUBSTRING(`kode_pesanan`,1,3) = '" . $prefix . "'")->orderBy('no_urut')->first()->no_urut;
+        $invoice = $prefix . $tahun . sprintf("%'.04d", $no_urut);
         return $invoice;
     } 
 
     public function getTglPesanAttribute()
     {
-        return Carbon::parse($this->attributes['tgl_pesan'])->translatedFormat('l, d F Y');
+        return Carbon::parse($this->attributes['tgl_pesan'])->translatedFormat('d F Y');
+    }
+
+    public function getBatasWaktuAttribute()
+    {
+        return Carbon::parse($this->attributes['batas_waktu'])->translatedFormat('d F Y');
     }
 }

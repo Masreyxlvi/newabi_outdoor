@@ -6,6 +6,7 @@ use App\Models\DetailPesanan;
 use App\Models\Pesanan;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PesananController extends Controller
 {
@@ -14,24 +15,30 @@ class PesananController extends Controller
     {
         $produks = Produk::where('nama_produk', $produk->nama_produk)->first();
 
+        if($request->qty > $produk->stok){
+            return redirect()->back()->with('error', 'Stok Habis');
+        }
         $validate = $request->validate([
             'tgl_pesan' => 'required|date',
             'batas_waktu' => 'required|date',
             'alamat' => 'nullable',
             'jaminan' => 'nullable',
         ]);      
+
+
       
-        $cek_pesanan_baru = Pesanan::where('status', 'belum_checkout')->first();
+        $cek_pesanan_baru = Pesanan::where('user_id', Auth::user()->id)->where('status', 'belum_checkout')->first();
         if(empty($cek_pesanan_baru)) {
             $validate['kode_pesanan'] = Pesanan::createInvoice();
             $validate['status'] = "belum_checkout";
+            $validate['user_id'] = Auth::user()->id;
             $validate['total_bayar'] = 0;    
             $input_pesanan = Pesanan::create($validate);
             
         }
 
 
-        $pesanan_baru = Pesanan::where('status', 'belum_checkout')->first();
+        $pesanan_baru = Pesanan::where('user_id', Auth::user()->id)->where('status', 'belum_checkout')->first();
 
         $produk_id = $produks->id;
         $pesanan_id = $pesanan_baru->id;
@@ -74,7 +81,7 @@ class PesananController extends Controller
 
     public function check_out()
     {
-        $pesanan = Pesanan::where('status', "belum_checkout")->first(); 
+        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', "belum_checkout")->first(); 
         if(!empty($pesanan)) {
             $DetailPesanans = DetailPesanan::where('pesanan_id', $pesanan->id)->get();
         }
@@ -98,7 +105,7 @@ class PesananController extends Controller
 
     public function konfirmasi(Request $request)
     {
-        $pesanan = Pesanan::where('status', "belum_checkout")->first();
+        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', "belum_checkout")->first();
         $pesanan_id = $pesanan->id;
         $pesanan->status = "sudah_checkout";
         $pesanan->alamat = $request->alamat;
@@ -112,6 +119,23 @@ class PesananController extends Controller
             $produk->update(); 
         }
 
-        return redirect('/products')->with('succes', 'Pesanan Masuk Keranjang');  
+        return redirect('/faktur/'.$pesanan->kode_pesanan)->with('succes', 'Pesanan Masuk Keranjang');  
+    }
+
+    public function riwayat()
+    {
+        return view('/riwayat', [
+            'pesanans' => Pesanan::where('user_id', Auth::user()->id)->where('status', "sudah_checkout")->latest()->get()
+        ]);
+    }
+
+    public function faktur(Pesanan $pesanan)
+    {
+        $data = array(
+            'pesanan' => Pesanan::where('kode_pesanan', $pesanan->kode_pesanan)->first(),
+            'title' => 'Faktur'
+        );
+        $pesanan->load(['detailPesanan']);
+        return view('/faktur')->with($data);
     }
 }

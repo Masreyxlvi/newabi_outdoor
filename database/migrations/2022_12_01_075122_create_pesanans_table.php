@@ -15,7 +15,7 @@ class CreatePesanansTable extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('user_id');
+            $table->foreignId('user_id');
             $table->string('kode_pesanan');
             $table->date('tgl_pesan');
             $table->date('batas_waktu');

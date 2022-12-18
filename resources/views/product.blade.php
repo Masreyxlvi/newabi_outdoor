@@ -14,6 +14,14 @@
 					</div>
 					@endif
 
+					{{-- @if(session()->has('error'))
+						@push('script')
+							<script>								
+								
+							</script>
+						@endpush
+					@endif --}}
+
 				
 <div class="container">
 	<section id="product">
@@ -71,19 +79,27 @@
 									<input type="text" readonly data-toggle="datepicker" class="custom-input" name="tgl_pesan" id="tgl_pesan" />
 								</div>
 								<div class="controlled-form mb-4">
-									<label class="custom-label" for="qty">Qty :</label>
-									<input type="number"  class="custom-input" name="qty" id="qty" />
+									<label class="custom-label" for="qty">Jumlah Barang :</label>
+									<input type="number"  class="custom-input @error('qty') is-invalid @enderror"  name="qty" id="qty" />
 								</div>
 								<div class="controlled-form mb-4">
-									<label class="custom-label" for="lama_pesan">Lama Pesanan</label>
-									<input type="number" class="custom-input" name="lama_pesan" id="lama_pesan" />
+									<label class="custom-label" for="lama_pesan">Lama Pesanan :</label>
+									<div class="d-inline text-center">
+										<input type="text" class="custom-inputs" name="lama_pesan" id="lama_pesan" />
+										<input type="text" disabled class="custom-select text-center" value="Hari" style="width: 15%">
+										{{-- <select class="custom-select" id="day" style="width: 25%">
+											<option selected value="1">Hari</option>
+											<option value="2">Minggu</option>
+										</select> --}}
+										
+									</div>
 								</div>
 								<div class="controlled-form mb-4">
 									<label class="custom-label" for="nama">Batas Waktu :</label>
-									<input type="text" readonly data-toggle="datepicker" class="custom-input" name="batas_waktu" id="batas_waktu" />
+									<input type="text" readonly class="custom-input" name="batas_waktu" id="batas_waktu"/>
 								</div>
 								<div class="controlled-form">
-									<button class="btn-kontak align-self-end" type="submit">Masukan Keranjang</button>
+									<button class="btn-kontak align-self-end" type="submit">	<i class="fa-solid fa-cart-shopping"></i> Masukan Keranjang</button>
 								</div>
 							</form>
 						</div>
@@ -94,6 +110,37 @@
 		</div>
 	</section>
 </div>
+
+	<section id="works">
+		<div class="container">
+			<div class="heading">
+				<h2>{{ $title }}</h2>
+				<!-- <p class="sm-center">Berikut adalah karya-karya yang dari Kami</p> -->
+			</div>
+			<div class="my-works">
+				<div class="row">
+					@foreach ($produks as $produk)                  
+					<div class="col-lg-4 col-sm-6 mb-5">
+						<div class="image-parent">
+							<div class="card shadow-sm">
+								<img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}" class="w-100" alt="" />   
+								<div class="card-body">
+									<p class="fw-3">{{ $produk->nama_produk }}</p>
+									<div class="d-flex justify-content-between align-items-center">
+										<div class="btn-group">
+											<a href="/products/{{ $produk->nama_produk }}" class="btn btn-sm btn-ctb">Pesan Sekarang</a>
+										</div>
+										<small class="text-muted">Rp. {{ number_format($produk->harga) }}/Hari</small>
+									</div>
+								</div> 
+							</div>
+						</div>
+					</div>
+					@endforeach
+				</div>
+			</div>
+		</div>
+	</section>
 @endsection
 
 @push('script')
@@ -109,6 +156,52 @@
 						return local.toJSON().slice(0,10);
 					}); 
 				$('#tgl_pesan').val(new Date().toDateInputValue());
+
+		
+		function batasWaktu(){
+				var tgl_pesan = document.getElementById('tgl_pesan').value;
+				var lama_pesan = document.getElementById('lama_pesan').value;
+				var lama_pesan = document.getElementById('lama_pesan').value;
+
+
+				const today = new Date(tgl_pesan);
+				var tomorow = new Date(today);
+				// lama_pesan.toString()
+				tomorow.setDate(Number(lama_pesan) + today.getDate())
+				tomorow.toLocaleDateString();
+
+				const year = tomorow.getFullYear()
+				const bulan = tomorow.getMonth() + 1
+				const day = tomorow.getDate()
+
+				$('#batas_waktu').val(year+'-'+bulan+'-'+day);
+		}
+
+		$('#lama_pesan').on('keyup change', function() {
+			batasWaktu(this)
+		})
+		$('#tgl_pesan').on('keyup change', function() {
+			batasWaktu(this)
+		})
+
+		$('#qty').on('keyup change', function() {
+			const qty = document.getElementById('qty');
+			var stok = {{ $produk->stok }};
+			// alert(stok)
+			if(qty.value > stok){
+				Swal.fire({
+					icon: 'error',
+					title: 'Jumlah Stok Tidak Tersedia',
+					text: 'Stok Tersedia : ' + stok, 
+					showConfirmButton: false,
+					timer: 2500
+				})
+				$('#qty').val(stok);
+			}
+			
+		})
+
+
 
 	</script>
 @endpush

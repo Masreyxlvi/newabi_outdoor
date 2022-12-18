@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="navbar-flex">
 			<div class="navigation-brand">
-				<a href="#" class="lora text-decoration-none"><img src="assets/img/logo/logo.png" alt="" width="75px" /><span class="fs-5">&nbsp; NEWABI OUTDOOR</span></a>
+				<a href="#" class="lora text-decoration-none"><img src="{{ asset('assets') }}/img/logo/logo.png" alt="" width="75px" /><span class="fs-5">&nbsp; NEWABI OUTDOOR</span></a>
 			</div>
 			<div class="navigation-links">
 				<ul>
@@ -14,15 +14,24 @@
 				</ul>
 			</div>
 			<div class="navigation-social-media">
-				<a href="#">
-					<img src="{{ asset('assets') }}/img/icons/fb-icons.png" width="24" alt="" />
-				</a>
-				<a href="https://www.instagram.com/newabirentaloutdoor/?hl=id" target="_blank">
-					<img src="{{ asset('assets') }}/img/icons/ig-icons.png" width="24" alt="" />
-				</a>
-				<a href="#">
-					<img src="{{ asset('assets') }}/img/icons/twt-icons.png" width="24" alt="" />
-				</a>
+				@auth
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					{{ auth()->user()->username }}
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#"><i class="bi bi-person-circle"></i> My Profile</a></li>
+						<li><a class="dropdown-item" href="/riwayat"><i class="bi bi-cart-check-fill"></i> History</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li>
+							<form action="/logout" method="post">
+								@csrf
+								<button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
+							</form>
+						</li>
+					</ul>
+				@else
+					<a href="/login" class="login">Login Now</a>
+				@endauth
 			</div>
 		</div>
 	</div>

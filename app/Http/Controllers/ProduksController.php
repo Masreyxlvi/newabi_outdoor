@@ -22,7 +22,9 @@ class ProduksController extends Controller
     public function show(Produk $produk)
     {
         return view('product', [
-            'produk' => $produk
+            'title' => "Relate Product",
+            'produk' => $produk,
+            "produks" => Produk::with('kategori')->latest()->get(),
         ]);
     }
 

@@ -107,16 +107,30 @@
               </div>
               <div class="my-works">
                 <div class="row">
-                  @foreach ($produks as $produk)                  
+                  @foreach ($produks as $produk)   
+                                 
                   <div class="col-lg-4 col-sm-6 mb-5">
                     <div class="image-parent">
                       <div class="card shadow-sm">
+                        @if ($produk->stok == 0)
+                        <div class="stok">
+                            <img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}" alt="" class="w-100"/>
+                            <div class="inside-content">
+                              <p>Stok Habis</p>
+                            </div>
+                            <div class="card-body">
+                              <p class="fw-3">{{ $produk->nama_produk }}</p>
+                              <div class="d-flex justify-content-between align-items-center">
+                                
+                        @else
+
                         <img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}" class="w-100" alt="" />   
                         <div class="card-body">
                           <p class="fw-3">{{ $produk->nama_produk }}</p>
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                               <a href="/products/{{ $produk->nama_produk }}" class="btn btn-sm btn-ctb">Pesan Sekarang</a>
+                              @endif
                             </div>
                             <small class="text-muted">Rp. {{ number_format($produk->harga) }}/Hari</small>
                           </div>
