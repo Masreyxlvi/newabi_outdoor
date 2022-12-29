@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PesananController;
@@ -23,11 +24,23 @@ use Illuminate\Support\Facades\Route;
 //     return view('home');
 // });
 
+// login with google 
+Route::get('/google', [GoogleController::class, 'redirect'])->name('login.google');
+Route::get('/google/call-back', [GoogleController::class, 'callbackGoogle']);
+// login with Facebook
+
+
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/', [HomeController::class , 'index']);
+Route::get('/contact', function(){
+		return view('contact');
+});
+Route::get('/coba', function(){
+		return view('coba');
+});
 Route::get('/register', [RegisterController::class , 'index']);
 Route::post('/register', [RegisterController::class , 'store']);
 

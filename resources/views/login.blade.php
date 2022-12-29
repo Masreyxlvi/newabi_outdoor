@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NEWABI OUTDOOR | Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 		<link rel="stylesheet" href="{{ asset('assets') }}/css/login.css">
 		<link rel="stylesheet" href="{{ asset('assets') }}/build/sweetalert2/sweetalert2.min.css" />
 	</head>
@@ -16,6 +17,7 @@
 						<script>								
 								Swal.fire({
 								icon: 'warning',
+								position: 'top-end',
 								title: 'Email Atau Password Salah !!',
 								showConfirmButton: false,
 								timer: 2000
@@ -25,21 +27,26 @@
 				@endif
 				<div class="card-body">
 					<h1 class="card-title text-center">LOGIN</h1>
+					<p class="text-center">Harap Login Untuk Melakukan Pesanan</p>
 				</div>
 				<div class="card-text">
 					<form action="/login" method="post">
 						@csrf
 						<div class="mb-1">
-							<input type="email" class="form-control field" name="email" placeholder="Email" id="email" aria-describedby="emailHelp">
+							<input type="email" class="form-control field" name="email" placeholder="Email" id="email" autofocus required>
 						</div>
 						<div class="mb-1">
-							<input type="password" class="form-control field" name="password" placeholder="Password" id="password">
+							<input type="password" class="form-control field" name="password" placeholder="Password" id="password" autofocus required>
 						</div>
 						<div class="d-grid gap-2">
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="submit" class="btn btn-primary">LOGIN</button>
 						</div>
 						<div class="mt-2 text-center" >
 							<p>Don't Have An Account ? <a href="/register" style="text-decoration: none">Regist Now</a></p>
+						</div>	
+						<div class=" text-center d-grid gap-2" >
+							<a href="{{ route('login.google') }}" class="btn-google" style="text-decoration: none;"> <i class="bi bi-google fs-5"></i> &nbsp; Log In With Google</a>
+							<a href="#" class="btn-facebook" style="text-decoration: none;"> <i class="bi bi-facebook fs-5"></i> &nbsp; Log In With Facebook</a> 
 						</div>	
 					</form>
 				</div>

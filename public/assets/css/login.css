@@ -44,7 +44,11 @@ body {
     border-radius: 2px;
     background-color: #7460ee;
 }
-
+.card-body p {
+    font-size: 13px;
+    color: rgb(83, 83, 83);
+    font-style: italic;
+}
 .field {
     border-radius: 20px;
     margin-bottom: 15px;
@@ -60,7 +64,7 @@ body {
 
 .btn {
     background-color: #7460ee;
-    color: #000;
+    color: white;
     transform: translateY(10px);
     font-size: 14px;
     border-radius: 20px;
@@ -70,4 +74,34 @@ body {
 a:hover {
     font-weight: 900;
     transition: 0.3s;
+}
+
+.btn-google {
+    background-color: red;
+    color: white;
+    transform: translateY(10px);
+    font-size: 14px;
+    border-radius: 20px;
+    padding: 7px;
+    margin-bottom: 10px;
+}
+.btn-facebook {
+    background-color: #016efc !important;
+    color: white;
+    /* transform: translateY(10px); */
+    font-size: 14px;
+    border-radius: 20px;
+    padding: 7px;
+    margin-bottom: 10px;
+}
+
+.btn-google:hover {
+    font-weight: 900;
+    transition: 0.3s;
+    color: white;
+}
+.btn-facebook:hover {
+    font-weight: 900;
+    transition: 0.3s;
+    color: white;
 }

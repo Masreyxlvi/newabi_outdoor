@@ -19,90 +19,65 @@
 							<script>								
 								
 							</script>
-						@endpush
+						@endpushs
 					@endif --}}
 
 				
-<div class="container">
+<div class="container-sm">
 	<section id="product">
 		<div class="row justify-content-between">
 			<div class="col-lg-6">
-				<div class="product_img">
-					<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-						<div class="carousel-indicators">
-							<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-							<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-							<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-						</div>
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}" class="d-block w-100" alt="...">
-							</div>
-							{{-- <div class="carousel-item">
-								<img src="{{ asset('assets') }}/img/works/borneo_4.png" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="{{ asset('assets') }}/img/works/borneo_3.png" class="d-block w-100" alt="...">
-							</div> --}}
-						</div>
-						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Previous</span>
-						</button>
-						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Next</span>
-						</button>
+				<img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}" class="d-block w-100" alt="..." id="ProductImg">
+				<div class="small-img-row">
+					<div class="small-img-col">
+						<img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}" class="d-block w-100 smallImg" alt="...">
+					</div>
+					<div class="small-img-col">
+						<img src="{{ asset('assets') }}/img/product/tenda1.jpg" class="d-block w-100 smallImg" alt="...">
+					</div>
+					<div class="small-img-col">
+						<img src="{{ asset('assets') }}/img/product/tenda2.jpg" class="d-block w-100 smallImg" alt="...">
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-6">
 				{{-- <div class="card card-body"> --}}
 				<div class="product_detail">
-					<div class="d-flex justify-content-between align-items-center">
-						<h2>{{ $produk->nama_produk }}</h2>
-						<h5 class="text-muted">Stok {{ $produk->stok }}</h5>
-					</div>
-					<h4>Rp. {{ number_format($produk->harga) }} Per Unit</h4>
+					<h1>{{ $produk->nama_produk }}</h1>
+					<h4>Rp. {{ number_format($produk->harga) }}</h4>
+					<h4 class="text-muted">Stok <span id="stok"> {{ $produk->stok }}</span></h4>
 					<p>{{ $produk->keterangan }}</p>
-				</div>
-				<div class="trancation">
-					<div class="col-lg-12">
-						<div class="card-form">
-							<div class="accent-pills mt-5">
-								<p>Pesan Sekarang</p>
-							</div>
-							<form action="/products/{{ $produk->nama_produk }}" method="post" class="custom-form">
-								@csrf
-								<div class="controlled-form mb-4">
-									<label class="custom-label"  for="tgl_pesan">Tanggal Pesanan :</label>
-									<input type="text" readonly data-toggle="datepicker" class="custom-input" name="tgl_pesan" id="tgl_pesan" />
+						<div class="trancation">
+							<div class="card-form">
+								<div class="accent-pills">
+									<P>Pesan Sekarang</P>
 								</div>
-								<div class="controlled-form mb-4">
-									<label class="custom-label" for="qty">Jumlah Barang :</label>
-									<input type="number"  class="custom-input @error('qty') is-invalid @enderror"  name="qty" id="qty" />
-								</div>
-								<div class="controlled-form mb-4">
-									<label class="custom-label" for="lama_pesan">Lama Pesanan :</label>
-									<div class="d-inline text-center">
-										<input type="text" class="custom-inputs" name="lama_pesan" id="lama_pesan" />
-										<input type="text" disabled class="custom-select text-center" value="Hari" style="width: 15%">
-										{{-- <select class="custom-select" id="day" style="width: 25%">
-											<option selected value="1">Hari</option>
-											<option value="2">Minggu</option>
-										</select> --}}
-										
+									<form action="/products/{{ $produk->nama_produk }}" method="post" class="custom-form">
+										@csrf
+											<div class="controlled-form mb-4">
+												<label class="custom-label" for="qty">Jumlah Barang :</label>
+												<input type="number"  class="custom-input @error('qty') is-invalid @enderror"  name="qty" id="qty"  value="{{ old('qty') }}" placeholder="1" />
+											</div>
+											<div class="controlled-form mb-4">
+												<label class="custom-label" for="lama_pesan">Lama Pesanan :</label>
+												<input type="number" class="custom-input" name="lama_pesan" id="lama_pesan" value="{{ old('lama_pesan') }}" placeholder="1"/>
+												<span id="hari">Hari</span>
+											</div>
+											<div class="controlled-form mb-4">
+												<label class="custom-label"  for="tgl_pesan">Tanggal Pesanan :</label>
+												<input type="text" readonly data-toggle="datepicker" class="custom-input" name="tgl_pesan" id="tgl_pesan" value="{{ old('tgl_pesan') }}" />
+												<span id="tgl"><i class="fa-solid fa-calendar-days fs-4" ></i></span>
+											</div>
+											<div class="controlled-form mb-2">
+												<label class="custom-label" for="nama">Batas Waktu :</label>
+												<input type="text" readonly class="custom-input" name="batas_waktu" value="{{ old('batas_waktu') }}" id="batas_waktu"/>
+											</div>
 									</div>
 								</div>
-								<div class="controlled-form mb-4">
-									<label class="custom-label" for="nama">Batas Waktu :</label>
-									<input type="text" readonly class="custom-input" name="batas_waktu" id="batas_waktu"/>
-								</div>
-								<div class="controlled-form">
-									<button class="btn-kontak align-self-end" type="submit">	<i class="fa-solid fa-cart-shopping"></i> Masukan Keranjang</button>
+								<div class="mb-4 ">
+									<button class="btn-kontak" type="submit"><i class="fa-solid fa-cart-shopping"></i> Add To Cart</button>
 								</div>
 							</form>
-						</div>
 					</div>
 				</div>
 				
@@ -123,7 +98,7 @@
 					<div class="col-lg-4 col-sm-6 mb-5">
 						<div class="image-parent">
 							<div class="card shadow-sm">
-								<img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}" class="w-100" alt="" />   
+								<img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}" class="w-100 smallImg" alt="" />   
 								<div class="card-body">
 									<p class="fw-3">{{ $produk->nama_produk }}</p>
 									<div class="d-flex justify-content-between align-items-center">
@@ -145,11 +120,19 @@
 
 @push('script')
 	<script>
-		$('[data-toggle="datepicker"]').datepicker({
-			format: 'yyyy-mm-dd',
-			autoHide: true,
-		});
+		// datapicker
+		var $tgl = $('#tgl_pesan');
+		var click = $('#tgl')
+		var a = new Date()
+		console.log(a)
+			$tgl.datepicker({
+				format: 'yyyy-mm-dd',
+				autoHide: true,
+				startDate: new Date(),
+				trigger: click,
+			});
 
+		// date now
 		Date.prototype.toDateInputValue = (function() {
 						var local = new Date(this);
 						local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -158,6 +141,7 @@
 				$('#tgl_pesan').val(new Date().toDateInputValue());
 
 		
+		// memunculkan batas waktu sesuai tgl pesan dan lama pesan
 		function batasWaktu(){
 				var tgl_pesan = document.getElementById('tgl_pesan').value;
 				var lama_pesan = document.getElementById('lama_pesan').value;
@@ -184,11 +168,11 @@
 			batasWaktu(this)
 		})
 
+		// memunculkan alert jika jumlah barang lebih dari stok
 		$('#qty').on('keyup change', function() {
 			const qty = document.getElementById('qty');
-			var stok = {{ $produk->stok }};
-			// alert(stok)
-			if(qty.value > stok){
+			const stok = $('#stok').text();
+			if(qty.value > Number(stok)){
 				Swal.fire({
 					icon: 'error',
 					title: 'Jumlah Stok Tidak Tersedia',
@@ -200,6 +184,23 @@
 			}
 			
 		})
+
+		// produk galery
+		var ProductImg = document.getElementById("ProductImg");
+		var smallImg = document.getElementsByClassName("smallImg");
+
+		smallImg[0].onclick = function()
+		{
+			ProductImg.src = smallImg[0].src;
+		}
+		smallImg[1].onclick = function()
+		{
+			ProductImg.src = smallImg[1].src;
+		}
+		smallImg[2].onclick = function()
+		{
+			ProductImg.src = smallImg[2].src;
+		}
 
 
 

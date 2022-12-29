@@ -1,12 +1,14 @@
 /* Custom fonts */
 @import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script&family=Viga&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700&display=swap");
 /* #E1E1E1, #AFAFAF, #808080, #545454 and #2B2B2B */
 /* My CSS Varibles */
 :root {
     --lora: "Lora", serif;
     --montserrat: "Montserrat", sans-serif;
     --opensans: "Open Sans", sans-serif;
+    --poppins: "Poppins", sans-serif;
 
     /* COLORS */
     --dark-100: #2b2b2b;
@@ -348,7 +350,7 @@ nav .navbar-flex .navigation-social-media a img {
 
 .btn-ctb {
     border-radius: 16px;
-    padding: 5px 20px;
+    padding: 5px 10px;
     background-color: transparent;
     color: var(--dark-100);
     border: 2px solid var(--dark-100);
@@ -601,119 +603,6 @@ nav .navbar-flex .navigation-social-media a img {
     transition: 0.3s all ease-in-out;
 }
 
-.trancation .card-form {
-    height: 686px;
-    width: 100%;
-    background-color: #fff;
-    border-radius: 24px;
-    position: relative;
-}
-
-.trancation .card-form .accent-pills {
-    width: 286px;
-    height: 40px;
-    border-radius: 24px;
-    background-color: #545454;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.trancation .card-form .accent-pills p {
-    line-height: 40px;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 600;
-    text-align: center;
-}
-
-.trancation .card-form .custom-form {
-    width: auto;
-    height: 100%;
-    padding: 40px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* background-color: red; */
-}
-
-.trancation .card-form .custom-form .controlled-form {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    /* background-color: coral; */
-}
-
-.trancation .card-form .custom-form .controlled-form .custom-label {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 12px;
-}
-
-.trancation .card-form .custom-form .controlled-form .custom-input {
-    border-radius: 8px;
-    padding: 20px;
-    color: #000;
-    font-size: 18px;
-    border: none;
-    background-color: #d9d9d9;
-    height: 48px;
-}
-.trancation .card-form .custom-form .controlled-form .custom-inputs {
-    border-radius: 8px;
-    padding: 20px;
-    color: #000;
-    font-size: 18px;
-    flex-direction: column;
-    border: none;
-    width: 84%;
-    background-color: #d9d9d9;
-    height: 48px;
-}
-.trancation .card-form .custom-form .controlled-form .custom-select {
-    border-radius: 8px;
-    padding: 12px;
-    color: var(--gray-25) !important;
-    font-weight: 500;
-    font-size: 18px;
-    flex-direction: column;
-    border: none;
-    width: 84%;
-    background-color: var(--dark-100) !important;
-    height: 48px;
-}
-
-.trancation .card-form .custom-form .controlled-form .custom-textarea {
-    resize: none;
-    border-radius: 8px;
-    padding: 20px;
-    color: #000;
-    font-size: 18px;
-    border: none;
-    background-color: #d9d9d9;
-    height: 128px;
-}
-
-.trancation .card-form .custom-form .btn-kontak {
-    width: 50%;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    background-color: var(--dark-75);
-    color: #fff;
-    font-weight: 500;
-    height: 42px;
-    transition: 0.3s all ease-in-out;
-}
-
-.trancation .card-form .custom-form .btn-kontak:hover {
-    background-color: var(--dark-100);
-    transition: 0.3s all ease-in-out;
-}
-
 /* Gallery */
 #gallery {
     padding: 60px 0 60px 0;
@@ -934,6 +823,7 @@ nav .navbar-flex .navigation-social-media a img {
     font-family: var(--lora);
     font-weight: 700;
 }
+
 /* .stok img:hover {
     opacity: 50%;
 }
@@ -1276,54 +1166,152 @@ footer .copyright {
     font-weight: 700;
 }
 
+/* single Product */
+/* .container-sm {
+    width: 992px;
+    height: auto;
+} */
+
 #product {
     padding: 60px 0 20px 0;
+    font-family: var(--poppins);
 }
 
 #product .product_img {
     width: 100%;
     height: auto;
 }
-#product .product_img .carousel-inner {
-    width: 100%;
-    height: 500px;
-    padding: 8px;
-    background-color: #fff;
+
+.small-img-row {
     display: flex;
-    justify-content: stretch;
-    align-items: stretch;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#product .product_img .carousel-inner .carousel-item {
-    background-size: cover;
-    object-fit: cover;
-    object-position: center;
+.small-img-col {
+    flex-basis: 33%;
+    cursor: pointer;
+    border: 1px solid #222;
 }
 
 #product .product_detail {
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
-#product .product_detail h2 {
-    font-size: 40px;
-    /* font-weight: 600; */
-    /* text-align: center; */
+#product .product_detail h1 {
+    font-size: 42px;
 }
 
 #product .product_detail h4 {
-    font-size: 25px;
-    margin-top: 20px;
-    /* color: greenyellow; */
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: normal;
+}
+#product .product_detail h5 {
+    display: block;
 }
 
 #product .product_detail p {
-    font-size: 15px;
-    margin-top: 20px;
+    font-size: 18px;
+    margin-top: 15px;
     /* color: greenyellow; */
 }
 
 #product .trancation {
-    margin-top: 50px;
+    margin-top: 20px;
+}
+
+.trancation .card-form {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 24px;
+    position: relative;
+}
+.trancation .card-form .accent-pills {
+    background: var(--dark-75);
+    /* width: 50%; */
+    border-radius: 24px;
+    margin-top: 40px;
+    height: auto;
+}
+
+.trancation .card-form .accent-pills p {
+    line-height: 40px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.trancation .card-form .custom-form {
+    width: auto;
+    height: 100%;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.trancation .card-form .custom-form .controlled-form {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.trancation .card-form .custom-form .controlled-form span {
+    position: absolute;
+    right: 35px;
+    bottom: 8px;
+    color: var(--dark-100);
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.trancation .card-form .custom-form .controlled-form .custom-label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.trancation .card-form .custom-form .controlled-form .custom-input {
+    border-radius: 8px;
+    padding: 20px;
+    color: #000;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid var(--dark-100);
+    height: 30px;
+}
+
+.trancation .card-form .custom-form .controlled-form .custom-textarea {
+    resize: none;
+    border-radius: 8px;
+    padding: 20px;
+    color: #000;
+    font-size: 18px;
+    border: none;
+    background-color: #d9d9d9;
+    height: 128px;
+}
+
+.btn-kontak {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 8px;
+    font-size: 16px;
+    background-color: var(--dark-75);
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s all ease-in-out;
+}
+
+.btn-kontak:hover {
+    background-color: var(--dark-100);
+    transition: 0.3s all ease-in-out;
 }
 
 /* Footer Style */
@@ -1431,7 +1419,7 @@ footer .copyright {
     height: 100%;
 }
 .stok img {
-    opacity: 85%;
+    opacity: 80%;
 }
 .stok:hover img {
     -webkit-transition: all 0.3s ease-in-out;

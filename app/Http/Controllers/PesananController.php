@@ -71,7 +71,7 @@ class PesananController extends Controller
             $detail_pesanan->update();           
         }
         
-        $pesanan = Pesanan::where('status', 'belum_checkout')->first();
+        $pesanan = Pesanan::where('status', 'belum_checkout')->where('user_id', Auth::user()->id)->first();
         $pesanan->total_bayar = $pesanan->total_bayar+$produks->harga*$request->lama_pesan*$request->qty;
         $pesanan->update();
 

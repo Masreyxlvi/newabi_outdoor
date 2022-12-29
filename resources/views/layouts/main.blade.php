@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/build/datepicker/datepicker.css" />
     {{-- bootstrap icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-
+    {{-- Aos --}}
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     @stack('head')
 
@@ -40,9 +41,10 @@
 
     <!-- Main Content -->
     <main>
-			@yield('main')
+      @yield('main')
+      @Auth
       <?php
-        $pesanan_utama = App\Models\Pesanan::where('status', "belum_checkout")->first();
+        $pesanan_utama = App\Models\Pesanan::where('status', "belum_checkout")->where('user_id', Auth::user()->id)->first();
         if(!empty($pesanan_utama))
         {
           $notif = App\Models\DetailPesanan::where('pesanan_id', $pesanan_utama->id)->count();
@@ -57,6 +59,7 @@
           </span>
         @endif
       </a>
+      @endAuth
     </main>
 
     <!-- Footer Section -->
@@ -73,6 +76,37 @@
     {{-- datepicker --}}
     <script src="{{ asset('assets') }}/build/jquery/jquery.js"></script>
     <script src="{{ asset('assets') }}/build/datepicker/datepicker.js"></script>
+    {{-- Aos --}}
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    {{-- Gsap --}}
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js" ></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
+    <script>
+      const produk = document.querySelectorAll('.image-parent');
+  
+      produk.forEach((img, i)=> {
+        img.dataset.aos = 'fade-down';
+        img.dataset.aosDelay = i * 100;
+      });
+  
+      AOS.init({
+          duration: 1000,
+          once: true,
+      });
+  
+      gsap.registerPlugin(TextPlugin);
+      // navbar
+      gsap.from('.navigation-brand img', {duration:1, y:'-100%', opacity:0, ease: 'bounce'});
+      gsap.to('.navigation-brand span', {duration:1, delay:1, text:'NEWABI OUTDOOR'});
+      gsap.from('.navigation-links ul', {duration:1, delay:1.5, y:'-100%', opacity:0, ease: 'elastic'});
+      gsap.to('.navigation-social-media a', {duration:1, delay:2, y:0, opacity:100, ease: 'elastic'});
+      // hero
+      gsap.from('.hero-text h1', {duration:1, delay:2, y:-100, opacity:0, ease: 'power3'})
+      gsap.from('.hero-text p', {duration:1, delay:2.3, x:-100, opacity:0, ease: 'power4'})
+      gsap.from('.hero-banner', {duration:1.2, delay:2.7, x:100, opacity:0, ease: 'elastic'})
+      gsap.to('.hero-text a', {duration:1, delay:3.5, y:0, opacity:100, ease: 'elastic'})
+    </script>
+
     <script>
       $('.delete').click(function(e){
         e.preventDefault()
@@ -90,6 +124,7 @@
         })
       })
     </script>
+ 
     @stack('script')
   </body>
 </html>

@@ -1,0 +1,31 @@
+/* single product details */
+.single-product {
+    margin-top: 60px;
+}
+.single-product .col-6 img {
+    padding: 0;
+}
+.single-product .col-6 {
+    padding: 20px;
+}
+.single-product h4 {
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.single-product input[name="tgl_pesan"] {
+    padding-left: 10px;
+    font-size: 20px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.single-product input span {
+    position: absolute;
+    right: 20px;
+    bottom: 8px;
+    color: #000;
+    font-size: 17px;
+    font-weight: bold;
+}

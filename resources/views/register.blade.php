@@ -31,8 +31,8 @@
 					<form action="/register" method="post">
 						@csrf
 						<div class="mb-1">
-							<input type="text" class="form-control field @error('username') is-invalid @enderror" id="Username" name="username" placeholder="Username">
-							@error('username')
+							<input type="text" class="form-control field @error('name') is-invalid @enderror" id="name" name="name" placeholder="Full Name">
+							@error('name')
 							<div class="invalid-feedback">
 								{{ $message }}
 							</div>
