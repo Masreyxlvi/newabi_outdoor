@@ -37,7 +37,7 @@ class Pesanan extends Model
 
     public function getTglPesanAttribute()
     {
-        return Carbon::parse($this->attributes['tgl_pesan'])->translatedFormat('d F Y');
+        return Carbon::parse($this->attributes['tgl_pesan'])->translatedFormat('d F Y H i');
     }
 
     public function getBatasWaktuAttribute()

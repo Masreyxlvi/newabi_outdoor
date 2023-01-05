@@ -17,7 +17,6 @@ class RegisterController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required|min:3',
-            'no_hp' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:5',
         ]);
@@ -27,6 +26,6 @@ class RegisterController extends Controller
 
         User::create($validate);
 
-        return redirect('/register')->with('succes', 'Registration Success');
+        return redirect('/login')->with('succes', 'Registration Success');
     }
 }

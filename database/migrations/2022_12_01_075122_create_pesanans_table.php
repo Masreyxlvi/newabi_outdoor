@@ -17,10 +17,7 @@ class CreatePesanansTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('kode_pesanan');
-            $table->date('tgl_pesan');
-            $table->date('batas_waktu');
             $table->bigInteger('total_bayar');
-            $table->text('alamat')->nullable();
             $table->string('jaminan')->nullable();
             $table->enum('status', ['sudah_checkout', 'belum_checkout']);
             $table->timestamps();

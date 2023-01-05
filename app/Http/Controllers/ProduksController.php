@@ -24,7 +24,7 @@ class ProduksController extends Controller
         return view('product', [
             'title' => "Relate Product",
             'produk' => $produk,
-            "produks" => Produk::with('kategori')->latest()->get(),
+            "produks" => Produk::with(['kategori', 'detail_pesanan'])->latest()->get(),
         ]);
     }
 

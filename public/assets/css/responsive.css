@@ -253,7 +253,9 @@
         margin-top: 20px;
         margin-left: 0;
     }
-
+    .cart-info p {
+        display: none;
+    }
     /* Contact Style */
     #contact {
         padding: 100px 0 50px 0 !important;

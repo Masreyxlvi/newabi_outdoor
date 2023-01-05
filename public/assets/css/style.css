@@ -1314,6 +1314,80 @@ footer .copyright {
     transition: 0.3s all ease-in-out;
 }
 
+/* cart items */
+.cart-page {
+    margin: 80px auto;
+    font-family: var(--poppins);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.cart-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+td img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+
+th {
+    text-align: left;
+    padding: 5px;
+    color: #fff;
+    background: #545454;
+    font-weight: normal;
+}
+
+td {
+    padding: 10px 5px;
+}
+
+td input {
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+}
+
+td p {
+    margin-bottom: 0;
+}
+
+.total-price {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.total-price table {
+    border-top: 3px solid #545454;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+}
+td:last-child {
+    text-align: right;
+}
+th:last-child {
+    text-align: right;
+}
+/* 
+.date td:last-child {
+    text-align: left;
+}
+.date th:last-child {
+    text-align: left;
+}
+.date {
+    background-color: var(--gray-25);
+    padding: 3px;
+    margin-bottom: 10px;
+}
+.date p {
+    font-size: 14px;
+} */
+
 /* Footer Style */
 footer {
     padding: 0;
