@@ -1,3 +1,7 @@
+.form-check-inline {
+    margin-right: 10px;
+    /* display: inline; */
+}
 input[name="lokasi"] + label {
     display: block;
 }

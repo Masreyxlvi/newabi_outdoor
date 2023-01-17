@@ -1,8 +1,65 @@
 @extends('layouts.main')
 
 @section('main')
-    <div class="container">
-        <section id="gallery">
+    <div class="container card-page mt-5 mb-5">
+        <div class="row">
+            <div class="col-lg-10">
+                <h2>
+                    <i class="fa-solid fa-cart-shopping"></i> <span></span>
+                </h2>
+            </div>
+            <div class="col-lg-2">
+                <a href="/products" class="btn btn-outline-dark "><i class="bi bi-box-arrow-left"></i> Back To Shop</a>
+            </div>
+        </div>
+        <table class="mt-2">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>SubTotal</th>
+                </tr>
+            </thead>
+            @foreach ($pesanans as $key => $pesanan)
+                @foreach ($pesanan->detailPesanan as $dp)
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="cart-info">
+                                    <img src="{{ asset('assets') }}/img/product/{{ $dp->produk->gambar }}"
+                                        alt="{{ $dp->produk->gambar }}">
+                                    <div>
+                                        <p>{{ $dp->produk->nama_produk }}</p>
+                                        <small class="d-block">
+                                            <b> Pickup : </b>
+                                            {{ date('d/M/Y', strtotime($dp->tgl_pesan)) }}
+                                            at
+                                            {{ date('H:i', strtotime($dp->tgl_pesan)) }}
+                                        </small>
+                                        <small class="d-block">
+                                            <b> Dropoff :
+                                            </b>{{ date('d/M/Y', strtotime($dp->batas_waktu)) }} at
+                                            {{ date('H:i', strtotime($dp->batas_waktu)) }}
+                                        </small>
+                                        <small>
+                                            <b> Total Hari : </b>{{ $dp->lama_pesan }} hari
+                                        </small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <small>Rp.
+                                    {{ number_format($dp->produk->harga) }}</small>
+                            </td>
+                            <td><input type="number" disabled value="{{ $dp->qty }}"></td>
+                            <td>Rp. {{ number_format($dp->jumlah_harga) }}</td>
+                        </tr>
+                    </tbody>
+                @endforeach
+            @endforeach
+        </table>
+        {{-- <section id="gallery">
             <h2>Riwayat Pesanan </h2>
             <div class="row">
                 <div class="col-md-12">
@@ -37,9 +94,9 @@
                     </table>
                 </div>
             </div>
-        </section>
+        </section> --}}
     </div>
-    @foreach ($pesanans as $key => $pesanan)
+    {{-- @foreach ($pesanans as $key => $pesanan)
         <div class="modal fade" id="detail{{ $key }}" tabindex="-1" aria-labelledby="detailLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -62,7 +119,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pesanan->detailPesanan as $dp)
+                                        @foreach ($pesanan->pesanan->detailPesanan as $dp)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $dp->produk->nama_produk }}</td>
@@ -86,5 +143,5 @@
             </div>
         </div>
     @endforeach
-    <!-- Modal -->
+    <!-- Modal --> --}}
 @endsection

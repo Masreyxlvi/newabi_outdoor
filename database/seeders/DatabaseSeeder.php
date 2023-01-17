@@ -16,13 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::create([
-        //     'name' => 'Reyhan Tri Ramadan',
-        //     'email' => 'reyhantriramadan@gmail.com',
-        //     'password' => bcrypt('masrey2246'),
-        //     'no_hp' => '082219725915',
-        //     'status' => 'user',
-        // ]);
+        User::create([
+            'name' => 'Reyhan Tri Ramadan',
+            'email' => 'reyhantriramadan@gmail.com',
+            'password' => bcrypt('masrey2246'),
+            'no_hp' => '082219725915',
+            'role' => 'admin',
+        ]);
 
         Produk::create([
             'nama_produk' => 'Tenda Borneo 4',
@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             'nama_produk' => 'Carriel Kap 40L-55L',
             'kategori_id' => '4',
             'harga' => '40000',
-            'stok' => '2',
+            'stok' => '4',
             'gambar' => 'carriel 40.png',
             'keterangan' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio voluptates officia ex nesciunt exercitationem ut impedit illo dolore? Natus, pariatur!'
         ]);

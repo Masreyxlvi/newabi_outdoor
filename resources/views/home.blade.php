@@ -80,8 +80,10 @@
                             </div>
                             <div class="c-body">
                                 <h3>Open Camp & Trip</h3>
-                                <p>Anda ingin dipotret layaknya seorang model di dalam studio? jasa Kami yang satu ini
-                                    tentunya cocok sekali bagi Anda.</p>
+                                <p>Dalam hal ini kami memberikaan ruang atau kesempatan buat sobat semua dalam menyaluran
+                                    akan keresahan dalam Kegiatan Liburan Sobat Semua dengan cara memberi jalan untuk
+                                    bergabung dalam kegiatan yang sesekali akan di adakan kegiatan Camping Cera Atau Naik
+                                    Gunung oleh Tim Sobat Newabi</p>
                             </div>
                         </div>
                     </div>
@@ -92,8 +94,8 @@
                             </div>
                             <div class="c-body">
                                 <h3>Toko Outdoor</h3>
-                                <p>Mengabadikan dengan indah arsitektur bangunan pada perusahaan atau bangunan Anda bersamaa
-                                    Kami.</p>
+                                <p>Tidak Hanya Dari Bidang Jasa Sewa/Rental Alat Saja, Kami Hadir Untuk Sobat Semua Dalam
+                                    Penjualan Alat Outdoor Yang bisa di Akses Oleh Sobbat Semua di Newabi Outdoor.</p>
                             </div>
                         </div>
                     </div>

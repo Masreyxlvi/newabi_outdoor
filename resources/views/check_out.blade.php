@@ -88,7 +88,7 @@
                         </button>
                     </div>
                     <div class="col-lg-12">
-
+                        <h1></h1>
                     </div>
                 </div>
             </div>
@@ -101,7 +101,6 @@
                 <thead>
                     <tr>
                         <th>Product</th>
-                        <th>Price</th>
                         <th>Quantity</th>
                         <th>SubTotal</th>
                     </tr>
@@ -115,19 +114,9 @@
                                         alt="{{ $detailPesanan->produk->gambar }}">
                                     <div>
                                         <p>{{ $detailPesanan->produk->nama_produk }}</p>
-                                        <small class="d-block">
-                                            <b> Pickup : </b> {{ date('d/M/Y', strtotime($detailPesanan->tgl_pesan)) }}
-                                            at
-                                            {{ date('H:i', strtotime($detailPesanan->tgl_pesan)) }}
-                                        </small>
-                                        <small class="d-block">
-                                            <b> Dropoff :
-                                            </b>{{ date('d/M/Y', strtotime($detailPesanan->batas_waktu)) }} at
-                                            {{ date('H:i', strtotime($detailPesanan->batas_waktu)) }}
-                                        </small>
-                                        <small>
-                                            <b> Total Hari : </b>{{ $detailPesanan->lama_pesan }} hari
-                                        </small>
+                                        <small>Rp.
+                                            {{ number_format($detailPesanan->produk->harga) }}</small>
+
                                         <br>
                                         <form action="/check_out/{{ $detailPesanan->id }}" method="POST">
                                             @method('DELETE')
@@ -139,38 +128,85 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                <small>Rp.
-                                    {{ number_format($detailPesanan->produk->harga) }}</small>
-                            </td>
-                            <td><input type="number" disabled value="{{ $detailPesanan->qty }}"></td>
+                            <td>{{ $detailPesanan->qty }}</td>
                             <td>Rp. {{ number_format($detailPesanan->jumlah_harga) }}</td>
                         </tr>
+
                     </tbody>
+                    <tfoot>
+
+                    </tfoot>
                 @endforeach
             </table>
 
             <div class="total-price">
-                <table>
+                <table class="price">
+                    <tr class="delivery">
+                        <td><b>Pengiriman Barang</b></td>
+                        <td>&nbsp;</td>
+                    </tr>
                     <tr>
-                        <td><b>Total Pembayaran</b> </td>
-                        <td>Rp. {{ number_format($pesanan->total_bayar) }}</td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" required name="lokasi" value="jasa_antar" id="jasa_antar" hidden>
+                                <label for="jasa_antar">
+                                    <div class="card mb-0">
+                                        <div class="card-body text-center">
+                                            <span>Pakai Jasa Antar</span>
+                                            <div class="float-end px-1 py-1">
+                                                {{-- <i class="fas fa-check-circle"></i> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" required name="lokasi" value="tempat" id="tempat" hidden>
+                                <label for="tempat">
+                                    <div class="card mb-0">
+                                        <div class="card-body text-center">
+                                            <span>Pergi Ke Lokasi</span>
+                                            <div class="float-end px-1 py-1">
+                                                {{-- <i class="fas fa-check-circle"></i> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Jaminan</b></td>
+                        <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <select name="jaminan" id="jaminan" class="form-control">
+                            <select name="jaminan" required id="jaminan" class="form-control">
                                 <option disabled selected>Jaminan</option>
-                                <option value="ktp">Ktp</option>
-                                <option value="sim">Sim</option>
-                                <option value="kartu_pelajar">Kartu Pelajars</option>
+                                <option value="ktp">KTP</option>
+                                <option value="sim">SIM</option>
+                                <option value="kartu_pelajar">Kartu Pelajar</option>
                             </select>
                         </td>
+                    </tr>
+
+                    <tr class="delivery">
+                        <td><b>Total Pembayaran</b> </td>
+                        <td>
+                            Rp. {{ number_format($pesanan->total_bayar) }}
+                        </td>
+                    </tr>
+                    <tr class="d-none " id="ongkir">
+                        {{-- <td>&nbsp;</td> --}}
+                        <td colspan="2"><i>Belum Termasuk Ongkir</i> </td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <form action="/konfirmasi" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-warning"> <i
+                                <button type="submit" class="btn btn-warning check_out"> <i
                                         class="fa-solid fa-cart-shopping"></i>Proceed
                                     To CheckOut</button>
                             </form>
@@ -178,6 +214,8 @@
                     </tr>
                 </table>
             </div>
+        @else
+            <h2>Belum Ada</h2>
         @endif
     </div>
 
@@ -185,9 +223,17 @@
 @endsection
 @push('script')
     <script>
+        $('[name="lokasi"]').on('change', function() {
+            if ($(this).val() == 'jasa_antar') {
+                $('#ongkir').removeClass('d-none');
+            } else {
+                $('#ongkir').addClass('d-none');
+            }
+        });
+    </script>
+    <script>
         $('[name="lokasi"]').on('keyup change', function() {
             if ($(this).val() == 'lokasi') {
-                // alert('lokasi')
                 var alamat = "Jln Baros Gg H Sulaeman Desa Sukataris Kec. Karangtengah Cianjur";
                 $('#alamat').val(alamat);
                 $('#isi').attr('hidden', true)
@@ -204,14 +250,9 @@
             e.preventDefault()
             let data = $(this).closest('form').find('buttom').text()
             Swal.fire({
-                    // title: "Sudah Yakin?", 
-                    // 	text: "Dengan Pesanan Anda?",
-                    // 	buttons:true,
-                    // 	dangerMode: true,
                     title: 'Sudah Yakin Dengan Pesanan Anda?',
                     icon: "info",
                     showDenyButton: true,
-                    // showCancelButton: true,
                     denyButtonText: `Cancel`,
                     confirmButtonText: 'Pesan Sekarang',
                 })

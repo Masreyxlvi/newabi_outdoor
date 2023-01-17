@@ -97,9 +97,10 @@ class PesananController extends Controller
         $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', "belum_checkout")->first(); 
         if(!empty($pesanan)) {
             $DetailPesanans = DetailPesanan::where('pesanan_id', $pesanan->id)->get();
+            return view('/check_out', compact(['pesanan', 'DetailPesanans']));
         }
+        return view('/check_out');
         
-        return view('/check_out', compact(['pesanan', 'DetailPesanans']));
     }
 
     public function delete($id)
@@ -137,6 +138,11 @@ class PesananController extends Controller
 
     public function riwayat()
     {
+        // $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', "sudah_checkout")->first(); 
+        // if(!empty($pesanan)) {
+        //     $DetailPesanans = DetailPesanan::where('pesanan_id', $pesanan->id)->get();
+        // }
+        
         return view('/riwayat', [
             'pesanans' => Pesanan::where('user_id', Auth::user()->id)->where('status', "sudah_checkout")->latest()->get()
         ]);

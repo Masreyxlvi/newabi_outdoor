@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->double('no_hp')->nullable(); 
             $table->text('alamat')->nullable();
             $table->text('alamat_detail')->nullable();
-            $table->enum('status', ['admin', 'user'])->nullable();
+            $table->enum('role', ['admin', 'user'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

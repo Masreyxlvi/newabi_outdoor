@@ -12,12 +12,18 @@
                     @method('PUT')
                     <div class="row">
                         <div class="col-lg-6">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="name"
-                                value="{{ Auth::user()->name }}">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="name" id="name"
+                                    placeholder="Your Name" value="{{ Auth::user()->name }}">
+                                <label for="name">Your Name</label>
+                            </div>
                         </div>
                         <div class="col-lg-6">
-                            <input type="number" class="form-control" id="no_hp" name="no_hp"
-                                placeholder="Phone Number" value="{{ Auth::user()->no_hp }}">
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="no_hp" name="no_hp"
+                                    placeholder="Phone Number" value="{{ Auth::user()->no_hp }}">
+                                <label for="name">Your Phone Number</label>
+                            </div>
                         </div>
                         <div class="col-lg-12 mt-4">
                             <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -101,8 +107,12 @@
                             </div>
                         </div>
                         <div class="col-lg-12 mt-4">
-                            <textarea name="alamat_detail" id="" class="form-control"
-                                placeholder="Detail lainnya (Nama jalan Rt Rw No Rumah)"> {{ Auth::user()->alamat_detail }}</textarea>
+                            <div class="form-floating mb-3">
+                                <textarea name="alamat_detail" id="" class="form-control"
+                                    placeholder="Detail lainnya (Nama jalan Rt Rw No Rumah)"> {{ Auth::user()->alamat_detail }}</textarea>
+                                <label for="name">Address Detail</label>
+                            </div>
+
                         </div>
                     </div>
             </div>
