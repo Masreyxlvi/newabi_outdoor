@@ -1,6 +1,18 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert" id="error-alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="card shadow  mb-4">
         <div class="card-header py-3">
             <h2> Edit Produk </h2>
@@ -42,9 +54,9 @@
                         <input type="hidden" name="oldGambar" value="{{ $produk->gambar1 }}">
                         @if ($produk->gambar1)
                             <img src="{{ asset('storage/' . $produk->gambar1) }}"
-                                class="img-preview img-fluid mb-3 col-sm-3 d-block">
+                                class="img-preview img-fluid mb-3 col-sm-5 d-block">
                         @else
-                            <img class="img-preview img-fluid mb-3 col-sm-3">
+                            <img class="img-preview img-fluid mb-3 col-sm-5">
                         @endif
                         <div class="input-group mb-3">
                             <div class="custom-file">
@@ -58,10 +70,9 @@
                             <textarea class="form-control" id="deskripsi" name="keterangan" rows="3">{{ $produk->keterangan }}</textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Edit</button>
+                            <button type="submit" class="btn btn-primary">Edit Produk</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

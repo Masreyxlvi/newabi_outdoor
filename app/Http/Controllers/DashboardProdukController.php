@@ -60,7 +60,7 @@ class DashboardProdukController extends Controller
 
         Produk::create($validate);
 
-        return redirect()->back()->with('succes', 'Data Berhasil Ditambahkan');
+        return redirect('/dashboard/produk')->with('succes', 'Data Berhasil Ditambahkan');
 
 
     }
@@ -120,7 +120,7 @@ class DashboardProdukController extends Controller
         Produk::where('id', $produk->id)
                     ->update($validate);
 
-        return redirect()->back()->with('succes', 'Data Berhasil Ditambahkan');
+        return redirect('/dashboard/produk')->with('succes', 'Data Berhasil Ditambahkan');
     }
 
     /**
