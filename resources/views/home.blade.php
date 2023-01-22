@@ -120,8 +120,8 @@
                                 <div class="image-parent">
                                     <div class="card shadow-sm">
                                         <div class="stok">
-                                            <img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}"
-                                                class="w-100" alt="" />
+                                            <img src="{{ asset('storage/' . $produk->gambar1) }}" class="w-100"
+                                                alt="" />
                                             <div class="inside-content">
                                                 <p>Stok Habis</p>
                                             </div>
@@ -143,7 +143,7 @@
                             @else
                                 <div class="image-parent">
                                     <div class="card shadow-sm">
-                                        <img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}" class="w-100"
+                                        <img src="{{ asset('storage/' . $produk->gambar1) }}" class="w-100"
                                             alt="" />
                                         <div class="card-body">
                                             <p class="fw-3">{{ $produk->nama_produk }}</p>

@@ -1,11 +1,32 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
+    @if (session()->has('succes'))
+        <div class="alert alert-success" id="succes-alert" role="alert">
+            {{ session('succes') }}
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert" id="error-alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#produk">
                 Tambah Data
             </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importData">
+                import
+            </button>
+
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -28,7 +49,15 @@
                                 <td>{{ $produk->kategori->nama_kategori }}</td>
                                 <td>Rp. {{ number_format($produk->harga) }}</td>
                                 <td>{{ $produk->stok }}</td>
-                                <td>Hapus | Edit
+                                <td>
+                                    <a href="/dashboard/produk/{{ $produk->id }}/edit" class="btn btn-warning">Edit</a>
+                                    <form action="/dashboard/produk/{{ $produk->id }}/edit" method="POST"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger border-0 delete"><i
+                                                class="mdi me-2 mdi-delete">Delete</i></button>
+                                    </form>
                                 <td>
                             </tr>
                         @endforeach
@@ -37,5 +66,6 @@
             </div>
         </div>
     </div>
-    @include('dashboard.produk.create')
+    {{-- @include('dashboard.produk.create') --}}
+    @include('dashboard.produk.import')
 @endsection

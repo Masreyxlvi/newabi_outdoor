@@ -23,6 +23,10 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#"><i class="bi bi-person-circle"></i> My Profile</a></li>
                         <li><a class="dropdown-item" href="/riwayat"><i class="bi bi-cart-check-fill"></i> History</a></li>
+                        @can('admin')
+                            <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-cart-check-fill"></i> Dashboard</a>
+                            </li>
+                        @endcan
                         <li>
                             <hr class="dropdown-divider">
                         </li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardProdukController extends Controller
 {
@@ -29,7 +30,11 @@ class DashboardProdukController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.produk.create', [
+            // 'produks' => Produk::latest()->get(),
+            'kategoris' => Kategori::all(),
+            'title' => "PRODUK"
+        ]);
     }
 
     /**
@@ -40,7 +45,24 @@ class DashboardProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'nama_produk' => 'required',
+            'kategori_id' => 'required',
+            'harga' => 'required',
+            'stok' => 'required',
+            'gambar1' => 'required|file|max:2048',
+            'keterangan' => 'required'
+        ]);
+
+        if($request->file('gambar1')) {
+            $validate['gambar1'] = $request->file('gambar1')->store('produk-image');
+        }
+
+        Produk::create($validate);
+
+        return redirect()->back()->with('succes', 'Data Berhasil Ditambahkan');
+
+
     }
 
     /**
@@ -60,9 +82,13 @@ class DashboardProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request ,Produk $produk)
     {
-        //
+        return view('/dashboard/produk/edit', [
+            'kategoris' => Kategori::all(),
+            'title' => "PRODUK",
+            'produk' => $produk
+        ]);
     }
 
     /**
@@ -72,9 +98,29 @@ class DashboardProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Produk $produk)
     {
-        //
+        $validate = $request->validate([
+            'nama_produk' => 'required',
+            'kategori_id' => 'required',
+            'harga' => 'required',
+            'stok' => 'required',
+            'gambar1' => 'required|file|max:2048',
+            'keterangan' => 'required'
+        ]);
+
+        if($request->file('gambar1')) {
+            if($request->oldGambar) {
+                Storage::delete($request->oldGambar);
+            }
+            $validate['gambar1'] = $request->file('gambar1')->store('produk-image');
+        }
+        // dd($validate);
+
+        Produk::where('id', $produk->id)
+                    ->update($validate);
+
+        return redirect()->back()->with('succes', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -83,8 +129,13 @@ class DashboardProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Produk $produk)
     {
-        //
+        if($produk->gambar1){
+            Storage::delete($produk->gambar1);
+        }
+        Produk::destroy($produk->id);
+
+        return redirect()->back()->with('succes', 'Data Berhasil Dihapus');
     }
 }

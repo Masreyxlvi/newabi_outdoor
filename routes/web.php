@@ -27,9 +27,9 @@ Route::get('/dashboard', function () {
     return view('dashboard.index', [
 			'title' => "DASHBOARD"
 		]);
-});
+})->middleware('role:admin');
 
-Route::resource('/dashboard/produk', DashboardProdukController::class)->middleware('auth');
+Route::resource('/dashboard/produk', DashboardProdukController::class)->middleware('role:admin');
 
 // login with google 
 Route::get('/google', [GoogleController::class, 'redirect'])->name('login.google');
@@ -75,3 +75,4 @@ Route::post('/get-kecamatan', [AlamatController::class, 'getKecamatan']);
 Route::post('/get-desa', [AlamatController::class, 'getDesa']);
 
 // 
+Route::post('/dashboard/produk/import', [ProduksController::class, 'import']);

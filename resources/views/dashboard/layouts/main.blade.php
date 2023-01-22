@@ -19,9 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets') }}/dashboard/css/sb-admin-2.min.css" rel="stylesheet">
-    <!-- Bootstraps link-->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> --}}
+    <!-- sweeatalert link-->
+    <link rel="stylesheet" href="{{ asset('assets') }}/build/sweetalert2/sweetalert2.min.css" />
 
 </head>
 
@@ -103,6 +102,9 @@
     <script src="{{ asset('assets') }}/vendor/jquery/jquery.min.js"></script>
     <script src="{{ asset('assets') }}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    {{-- sweeat alert --}}
+    <script src="{{ asset('assets') }}/build/sweetalert2/sweetalert2.min.js"></script>
+    <script src="{{ asset('assets') }}/build/sweetalert/sweetalert.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('assets') }}/vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -116,6 +118,24 @@
     <script src="{{ asset('assets') }}/dashboard/js/demo/chart-area-demo.js"></script>
     <script src="{{ asset('assets') }}/dashbooard/js/demo/chart-pie-demo.js"></script>
 
+    <script>
+        $('.delete').click(function(e) {
+            e.preventDefault()
+            let data = $(this).closest('form').find('buttom').text()
+            swal({
+                    title: "Kamu Yakin?",
+                    text: "Pesanan ini Ingin Dicancel?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((req) => {
+                    if (req) $(e.target).closest('form').submit()
+                    else swal.close()
+                })
+        })
+    </script>
+    @stack('script')
 </body>
 
 </html>

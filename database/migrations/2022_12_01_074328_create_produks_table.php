@@ -20,7 +20,9 @@ class CreateProduksTable extends Migration
             $table->bigInteger('harga');
             $table->integer('stok');
             $table->text('keterangan');
-            $table->string('gambar');
+            $table->string('gambar1')->nullable();
+            $table->string('gambar2')->nullable();
+            $table->string('gambar3')->nullable();
             $table->timestamps();
         });
     }

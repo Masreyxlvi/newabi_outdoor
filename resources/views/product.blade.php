@@ -27,12 +27,12 @@
         <section id="product">
             <div class="row justify-content-between">
                 <div class="col-lg-6">
-                    <img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}" class="d-block w-100" alt="..."
+                    <img src="{{ asset('storage/' . $produk->gambar1) }}" class="d-block w-100" alt="..."
                         id="ProductImg">
                     <div class="small-img-row">
                         <div class="small-img-col">
-                            <img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}"
-                                class="d-block w-100 smallImg" alt="...">
+                            <img src="{{ asset('storage/' . $produk->gambar1) }}" class="d-block w-100 smallImg"
+                                alt="...">
                         </div>
                         <div class="small-img-col">
                             <img src="{{ asset('assets') }}/img/product/tenda1.jpg" class="d-block w-100 smallImg"
@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="controlled-form mb-4">
-                                                <label class="custom-label" for="tgl_pesan">Pickup Date & Time :</label>
+                                                <label class="custom-label" for="tgl_pesan">TAnggal Pengambilan :</label>
                                                 <input type="text" readonly data-toggle="datepicker" class="custom-input"
                                                     name="tanggal" id="tgl_pesan" value="{{ old('tgl_pesan') }}" />
                                                 <span id="tgl"><i class="fa-solid fa-calendar-days fs-4"></i></span>
@@ -83,14 +83,14 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="controlled-form mb-4">
-                                                <label class="custom-label" for="tgl_pesan">&nbsp;</label>
+                                                <label class="custom-label" for="tgl_pesan">Waktu Pengambilan : </label>
                                                 <input type="time" class="custom-input" name="waktu" id="time_pick"
                                                     value="{{ old('tgl_pesan') }}" />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="controlled-form mb-4">
-                                                <label class="custom-label" for="tgl_pesan">Dropoff Date & Time :</label>
+                                                <label class="custom-label" for="tgl_pesan">Tanggal Pengembalian:</label>
                                                 <input type="text" readonly class="custom-input" name="date_drop"
                                                     value="{{ old('batas_waktu') }}" id="batas_waktu" />
                                                 <span id="tgl"><i class="fa-solid fa-calendar-days fs-4"></i></span>
@@ -98,7 +98,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="controlled-form mb-4">
-                                                <label class="custom-label" for="tgl_pesan">&nbsp;</label>
+                                                <label class="custom-label" for="tgl_pesan">Waktu Pengembalian</label>
                                                 <input type="time" readonly class="custom-input" name="time_drop"
                                                     id="time_drop" value="{{ old('tgl_pesan') }}" />
                                             </div>
@@ -131,8 +131,8 @@
                         <div class="col-lg-4 col-sm-6 mb-5">
                             <div class="image-parent">
                                 <div class="card shadow-sm">
-                                    <img src="{{ asset('assets') }}/img/product/{{ $produk->gambar }}"
-                                        class="w-100 smallImg" alt="" />
+                                    <img src="{{ asset('storage/' . $produk->gambar1) }}" class="w-100 smallImg"
+                                        alt="" />
                                     <div class="card-body">
                                         <p class="fw-3">{{ $produk->nama_produk }}</p>
                                         <div class="d-flex justify-content-between align-items-center">

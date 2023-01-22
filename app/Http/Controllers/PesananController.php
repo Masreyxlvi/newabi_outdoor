@@ -12,6 +12,7 @@ use App\Models\Village;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Twilio\Rest\Client;
 
 class PesananController extends Controller
 {
@@ -156,6 +157,19 @@ class PesananController extends Controller
         );
         $pesanan->load(['detailPesanan']);
         return view('/faktur')->with($data);
+    }
+
+    public function whatapps(){
+        $accountSid = getenv("TWILIO_ACCOUNT_SID");
+        $authToken = getenv("TWILIO_AUTH_TOKEN");
+        $client = new Client($accountSid, $authToken);
+        $client->messages->create(
+            'whatsapp:+6281313362467',
+            array(
+                'from' => 'whatsapp:+6281313362467',
+                'body' => 'Mantap'
+            )
+        );
     }
 
 }
