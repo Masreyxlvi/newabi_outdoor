@@ -80,10 +80,10 @@
                             </div>
                             <div class="c-body">
                                 <h3>Open Camp & Trip</h3>
-                                <p>Dalam hal ini kami memberikaan ruang atau kesempatan buat sobat semua dalam menyaluran
-                                    akan keresahan dalam Kegiatan Liburan Sobat Semua dengan cara memberi jalan untuk
-                                    bergabung dalam kegiatan yang sesekali akan di adakan kegiatan Camping Cera Atau Naik
-                                    Gunung oleh Tim Sobat Newabi</p>
+                                <p>Ruang bagi sobat Newabi dalam menghilangkan
+                                    keresahan melalui Kegiatan Liburan Camping Ceria dan Naik Gunung bersama Tim Sobat
+                                    Newabi
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
                             @else
                                 <div class="image-parent">
                                     <div class="card shadow-sm">
-                                        <img src="{{ asset('storage/' . $produk->gambar1) }}" class="w-100"
+                                        <img src="{{ asset('storage/' . $produk->mainImage()->image) }}" class="w-100"
                                             alt="" />
                                         <div class="card-body">
                                             <p class="fw-3">{{ $produk->nama_produk }}</p>
@@ -172,3 +172,17 @@
     </section>
     <!-- End: Works Section -->
 @endsection
+@push('script')
+    <script>
+        const produk = document.querySelectorAll('.image-parent');
+
+        produk.forEach((img, i) => {
+            img.dataset.aos = 'fade-down';
+            img.dataset.aosDelay = i * 100;
+        });
+        AOS.init({
+            duration: 1000,
+            // once: true,
+        });
+    </script>
+@endpush

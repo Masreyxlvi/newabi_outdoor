@@ -29,24 +29,24 @@
                     <input type="number" class="form-control" name="stok" id="stok" placeholder="" required>
                 </div>
                 <label for="stok">Gambar</label>
-                <img class="img-preview img-fluid mb-3 col-sm-3">
                 <div class="input-group mb-3">
-                    <div class="custom-file">
-                        <input type="file" class="custom--fileinput" id="gambar1"
-                            aria-describedby="inputGroupFileAddon01" name="gambar1" onchange="previewImage(1)">
-                        <label class="custom-file-label" for="gambar1">Pilih Gambar</label>
-                    </div>
+                    <input type="file" class="form-control" id="inputGroupFile02" name="images[]" accept="image/*"
+                        multiple>
+                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
                 </div>
                 <div class="form-group">
                     <label for="deskripsi">Deskripsi Produk</label>
                     <textarea class="form-control" id="deskripsi" name="keterangan" rows="3"></textarea>
+                </div>
+                <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
             </form>
         </div>
     </div>
 @endsection
 @push('script')
-    <script>
+    {{-- <script>
         function previewImage() {
             const image = document.querySelector('#gambar1');
             const imgPreview = document.querySelector('.img-preview');
@@ -60,5 +60,5 @@
                 imgPreview.src = oFREvent.target.result;
             }
         }
-    </script>
+    </script> --}}
 @endpush

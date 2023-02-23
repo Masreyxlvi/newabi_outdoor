@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Kategori;
 use App\Models\Produk;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class DashboardProdukController extends Controller
     public function create()
     {
         return view('dashboard.produk.create', [
-            // 'produks' => Produk::latest()->get(),
+ 
             'kategoris' => Kategori::all(),
             'title' => "PRODUK"
         ]);
@@ -50,18 +51,32 @@ class DashboardProdukController extends Controller
             'kategori_id' => 'required',
             'harga' => 'required',
             'stok' => 'required',
-            'gambar1' => 'required|file|max:2048',
+            // 'gambar1' => 'required|file|max:2048',
             'keterangan' => 'required'
         ]);
 
-        if($request->file('gambar1')) {
-            $validate['gambar1'] = $request->file('gambar1')->store('produk-image');
+        // if($request->file('gambar1')) {
+        //     $validate['gambar1'] = $request->file('gambar1')->store('produk-image');
+        // }
+
+        $new_product = Produk::create($validate);
+
+        if($request->has('images')) {
+            $images = $request->file('images');
+            $is_main = true;
+            foreach( $images as $image){
+                $imageName = $validate['nama_produk'].'-image'.time().rand(1,1000).'.'.$image->extension();
+                $path = $image->store('produk-image');
+                // dd($image);
+                Image::create([
+                    'produk_id' => $new_product->id,
+                    'image' => $path,
+                    'is_main' => $is_main
+                ]);
+                $is_main = false;
+            }
         }
-
-        Produk::create($validate);
-
         return redirect('/dashboard/produk')->with('succes', 'Data Berhasil Ditambahkan');
-
 
     }
 
@@ -73,7 +88,12 @@ class DashboardProdukController extends Controller
      */
     public function show($id)
     {
-        //
+        $produk = Produk::find($id);
+        if(!$produk) abort(404);
+        $images = $produk->images;
+
+        $title = "View";
+        return view('dashboard/produk/show', compact('produk', 'images', 'title'));
     }
 
     /**
@@ -98,31 +118,41 @@ class DashboardProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produk $produk)
+    public function update(Request $request, $id)
     {
-        $validate = $request->validate([
-            'nama_produk' => 'required',
-            'kategori_id' => 'required',
-            'harga' => 'required',
-            'stok' => 'required',
-            'gambar1' => 'required|file|max:2048',
-            'keterangan' => 'required'
-        ]);
-
-        if($request->file('gambar1')) {
-            if($request->oldGambar) {
-                Storage::delete($request->oldGambar);
-            }
-            $validate['gambar1'] = $request->file('gambar1')->store('produk-image');
+        $produk = Produk::find($id);
+        if (!$produk) {
+            return redirect()->back();
         }
-        // dd($validate);
-
-        Produk::where('id', $produk->id)
-                    ->update($validate);
-
-        return redirect('/dashboard/produk')->with('succes', 'Data Berhasil Ditambahkan');
+    
+        // Update data produk
+        $produk->update($request->all());
+    
+        // Handle upload gambar
+        if ($request->hasFile('images')) {
+            // Hapus gambar sebelumnya
+            $images = $produk->images;
+            foreach ($images as $image) {
+                $image->delete();
+            }
+    
+            // Upload gambar baru
+            $images = $request->file('images');
+            $is_main = true;
+            foreach ($images as $image) {
+                // $path = $image->store('produk-image');
+                $image = Image::create([
+                    'produk_id' => $id,
+                    'image' => $image->store('produk-image'),
+                    'is_main' => $is_main
+                ]);
+                $is_main = false;
+            }
+        }
+    
+        return redirect('/dashboard/produk')->with('succes', 'Data Berhasil DiEdit');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -131,11 +161,12 @@ class DashboardProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        if($produk->gambar1){
-            Storage::delete($produk->gambar1);
-        }
+        // if($produk->gambar1){
+        //     Storage::delete($produk->gambar1);
+        // }
         Produk::destroy($produk->id);
 
         return redirect()->back()->with('succes', 'Data Berhasil Dihapus');
+
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\Produk;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProduksTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +14,10 @@ class CreateProduksTable extends Migration
      */
     public function up()
     {
-        Schema::create('produks', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_produk');
-            $table->foreignId('kategori_id');
-            $table->bigInteger('harga');
-            $table->integer('stok');
-            $table->text('keterangan');
+            $table->foreignId("produk_id");
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateProduksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produks');
+        Schema::dropIfExists('images');
     }
 }

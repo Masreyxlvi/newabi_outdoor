@@ -1,34 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('dashboard.layouts.main')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <link rel="shortcut icon" href="{{ asset('assets') }}/img/logo/logo.png" />
+@push('head')
     <link rel="stylesheet" href="{{ asset('assets') }}/css/faktur.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('assets') }}/build/sweetalert2/sweetalert2.min.css" />
-
-    <title>NEWABI OUTDOOR | {{ $title }}</title>
-</head>
-
-<body>
-    @if (session()->has('succes'))
-        @push('script')
-            <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Pesanan Anda Sedang Diproses',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-            </script>
-        @endpush
-    @endif
+@endpush
+@section('container')
     <div class="page-content container">
         <div class="page-header text-blue-d2">
             <h1 class="page-title text-secondary-d1">
@@ -98,13 +73,11 @@
                                         class="text-600 text-90">ID:</span> {{ $pesanan->kode_pesanan }}</div>
 
                                 <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
-                                        class="text-600 text-90">Tgl Pesan:</span> </div>
+                                        class="text-600 text-90">Pengambilan Barang:</span> </div>
 
                                 <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
                                         class="text-600 text-90">Status:</span>
-                                    @if ($pesanan->status == 'sudah_checkout')
-                                        Sudah CheckOut
-                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -179,18 +152,13 @@
 
                     <div>
                         <span class="text-secondary-d1 text-105">Thank you for your business</span>
-                        <a href="/products" class="btn btn-danger btn-bold px-4 float-end mt-3  mt-lg-0">Back To
-                            Home</a>
-                        <a href="#" class="btn btn-info btn-bold px-4 float-end mt-3 mt-lg-0 mx-2">Pay Now</a>
                     </div>
+                    <a href="/products" class="btn btn-danger btn-bold px-4 float-end mt-3  mt-lg-0">Back To
+                        Home</a>
+                    <a class="btn btn-info btn-bold px-4 float-end mt-3 mt-lg-0 mx-2" onclick="whatsapp()">Pay
+                        Now</a>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-
-    <script src="{{ asset('assets') }}/build/sweetalert2/sweetalert2.min.js"></script>
-    @stack('script')
-</body>
-
-</html>
+@endsection

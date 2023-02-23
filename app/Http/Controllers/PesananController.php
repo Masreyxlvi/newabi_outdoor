@@ -8,6 +8,7 @@ use App\Models\Pesanan;
 use App\Models\Produk;
 use App\Models\Province;
 use App\Models\Regency;
+use App\Models\User;
 use App\Models\Village;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -121,10 +122,17 @@ class PesananController extends Controller
 
     public function konfirmasi(Request $request)
     {
+        $user = User::where('id', Auth::user()->id)->first();
+
+        if(empty($user->alamat) || empty($user->no_hp) ) {
+            return redirect('/profile')->with('error', 'Harap isi Alamat & No Handphone');
+        }
         $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status', "belum_checkout")->first();
         $pesanan_id = $pesanan->id;
         $pesanan->status = "sudah_checkout";
+        $pesanan->pickup = $request->pickup;
         $pesanan->jaminan = $request->jaminan;
+        // dd($pesanan);    
         $pesanan->update();
 
         $detail_pesanans = DetailPesanan::where('pesanan_id', $pesanan_id)->get();
@@ -134,7 +142,7 @@ class PesananController extends Controller
             $produk->update(); 
         }
 
-        return redirect('/faktur/'.$pesanan->kode_pesanan)->with('succes', 'Pesanan Masuk Keranjang');  
+        return redirect('/success')->with('succes', 'Pesanan Masuk Keranjang');  
     }
 
     public function riwayat()
@@ -149,27 +157,25 @@ class PesananController extends Controller
         ]);
     }
 
-    public function faktur(Pesanan $pesanan)
+    public function success()
     {
-        $data = array(
-            'pesanan' => Pesanan::where('kode_pesanan', $pesanan->kode_pesanan)->first(),
-            'title' => 'Faktur'
-        );
-        $pesanan->load(['detailPesanan']);
-        return view('/faktur')->with($data);
+        return view('/succes', [ 
+            'title' => "ALL PRODUCT"
+        ]);
     }
 
-    public function whatapps(){
-        $accountSid = getenv("TWILIO_ACCOUNT_SID");
-        $authToken = getenv("TWILIO_AUTH_TOKEN");
-        $client = new Client($accountSid, $authToken);
-        $client->messages->create(
-            'whatsapp:+6281313362467',
-            array(
-                'from' => 'whatsapp:+6281313362467',
-                'body' => 'Mantap'
-            )
-        );
+    public function whatsapp(Request $request)
+    {
+
+         $pesanans = Pesanan::where('user_id', Auth::user()->id)->where('status', "sudah_checkout")->orderBy('created_at' , 'desc')->with(['DetailPesanan.produk'])->first();
+            // $detail_pesanans = DetailPesanan::where('pesanan_id', $pesanans->id)->get();
+            // $produks = Produk::where('id', $detail_pesanans->produk_id)->get();
+            // $users = User::where('id', $pesanans->user_id)->first();
+
+         return response()->json([
+            'pesanans' => $pesanans
+        ]);
+     
     }
 
 }

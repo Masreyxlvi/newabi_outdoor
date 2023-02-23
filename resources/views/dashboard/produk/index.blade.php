@@ -20,9 +20,10 @@
     @endif
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#produk">
+            {{-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#produk">
                 Tambah Data
-            </button>
+            </button> --}}
+            <a href="/dashboard/produk/create" class="btn btn-info">Tambah Produk</a>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importData">
                 import
             </button>
@@ -33,7 +34,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            {{-- <th>Gambar</th> --}}
                             <th>Nama Produk</th>
                             <th>Categori</th>
                             <th>Harga</th>
@@ -44,15 +45,16 @@
                     <tbody>
                         @foreach ($produks as $produk)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                {{-- <td><img src="{{ asset('storage/' . $produk->gambar1) }}" alt="{{ $produk->gambar }}"
+                                        width="50px"></td> --}}
                                 <td>{{ $produk->nama_produk }}</td>
                                 <td>{{ $produk->kategori->nama_kategori }}</td>
                                 <td>Rp. {{ number_format($produk->harga) }}</td>
                                 <td>{{ $produk->stok }}</td>
                                 <td>
                                     <a href="/dashboard/produk/{{ $produk->id }}/edit" class="btn btn-warning">Edit</a>
-                                    <form action="/dashboard/produk/{{ $produk->id }}/edit" method="POST"
-                                        class="d-inline">
+                                    <a href="/dashboard/produk/{{ $produk->id }}" class="btn btn-info">Show</a>
+                                    <form action="/dashboard/produk/{{ $produk->id }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger border-0 delete"><i

@@ -17,11 +17,11 @@
             <div class="navigation-social-media">
                 @auth
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" style="opacity: 0; y:-100;">
+                        aria-expanded="false" style="opacity: 0; y:-100; text-transform: uppercase;">
                         {{ auth()->user()->name }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-person-circle"></i> My Profile</a></li>
+                        <li><a class="dropdown-item" href="/profile"><i class="bi bi-person-circle"></i> My Profile</a></li>
                         <li><a class="dropdown-item" href="/riwayat"><i class="bi bi-cart-check-fill"></i> History</a></li>
                         @can('admin')
                             <li><a class="dropdown-item" href="/dashboard"><i class="bi bi-cart-check-fill"></i> Dashboard</a>

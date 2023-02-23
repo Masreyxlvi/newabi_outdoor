@@ -50,20 +50,12 @@
                             <input type="number" class="form-control" name="stok" id="stok" placeholder="" required
                                 value="{{ old('stok', $produk->stok) }}">
                         </div>
+
                         <label for="stok">Gambar</label>
-                        <input type="hidden" name="oldGambar" value="{{ $produk->gambar1 }}">
-                        @if ($produk->gambar1)
-                            <img src="{{ asset('storage/' . $produk->gambar1) }}"
-                                class="img-preview img-fluid mb-3 col-sm-5 d-block">
-                        @else
-                            <img class="img-preview img-fluid mb-3 col-sm-5">
-                        @endif
                         <div class="input-group mb-3">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="gambar1" name="gambar1"
-                                    aria-describedby="inputGroupFileAddon01" onchange="previewImage()">
-                                <label class="custom-file-label" for="gambar1">Choose file</label>
-                            </div>
+                            <input type="file" class="form-control" id="inputGroupFile02" name="images[]"
+                                accept="image/*" multiple value="value="{{ old('image', $produk->images) }}">
+                            <label class="input-group-text" for="inputGroupFile02">Upload</label>
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi Produk</label>

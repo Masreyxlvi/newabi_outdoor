@@ -2,25 +2,25 @@
     margin-right: 10px;
     /* display: inline; */
 }
-input[name="lokasi"] + label {
+input[name="pickup"] + label {
     display: block;
 }
 
-input[name="lokasi"] + label .card {
+input[name="pickup"] + label .card {
     box-shadow: none;
     border: 2px solid #dee2e6;
     color: #535353;
 }
 
-input[name="lokasi"] + label i {
+input[name="pickup"] + label i {
     opacity: 0;
 }
 
-input[name="lokasi"]:checked + label i {
+input[name="pickup"]:checked + label i {
     opacity: 1;
 }
 
-input[name="lokasi"]:checked + label .card {
+input[name="pickup"]:checked + label .card {
     border: 2px solid #17a2b8;
     background-color: rgba(23, 164, 186, 0.1);
     color: #17a2b8;

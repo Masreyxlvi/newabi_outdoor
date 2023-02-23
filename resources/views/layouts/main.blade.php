@@ -89,18 +89,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
     <script>
-        const produk = document.querySelectorAll('.image-parent');
-
-        produk.forEach((img, i) => {
-            img.dataset.aos = 'fade-down';
-            img.dataset.aosDelay = i * 100;
-        });
-
-        AOS.init({
-            duration: 1000,
-            once: true,
-        });
-
         gsap.registerPlugin(TextPlugin);
         // navbar
         gsap.from('.navigation-brand a', {
@@ -128,14 +116,7 @@
             opacity: 100,
             ease: 'elastic'
         });
-        // hero
-        // gsap.from('.hero-text h1', {
-        //     duration: 1,
-        //     delay: 2,
-        //     y: -100,
-        //     opacity: 0,
-        //     ease: 'power3'
-        // })
+
         gsap.from('.hero-text p', {
             duration: 1,
             delay: 2.3,

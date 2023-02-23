@@ -67,36 +67,37 @@
                 <a href="/products" class="btn btn-outline-dark "><i class="bi bi-box-arrow-left"></i> Back To Shop</a>
             </div>
         </div>
-        <div class="card mt-4">
-            <div class="card-header text-danger">
-                <h5><i class="fa-solid fa-location-dot"></i> Alamat Pengiriman</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <h5>{{ Auth::user()->name }}</h5>
-                        <p>(+62) {{ Auth::user()->no_hp }}</p>
-                    </div>
-                    <div class="col-lg-7">
-                        <p>{{ Auth::user()->alamat_detail }}, {{ Auth::user()->alamat }}</p>
-                    </div>
-                    <div class="col-lg-2 text-end">
+        @if (!empty($pesanan))
+            <div class="card mt-4">
+                <div class="card-header text-danger">
+                    <h5><i class="fa-solid fa-location-dot"></i> Alamat Pengiriman</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <h5>{{ Auth::user()->name }}</h5>
+                            <p>(+62) {{ Auth::user()->no_hp }}</p>
+                        </div>
+                        <div class="col-lg-7">
+                            <p>{{ Auth::user()->alamat_detail }}, {{ Auth::user()->alamat }}</p>
+                        </div>
+                        <div class="col-lg-2 text-end">
 
-                        <button type="button" class="border-0 text-danger bg-light" data-bs-toggle="modal"
-                            data-bs-target="#FormAlamat">
-                            Ubah
-                        </button>
-                    </div>
-                    <div class="col-lg-12">
-                        <h1></h1>
+                            <button type="button" class="border-0 text-danger bg-light" data-bs-toggle="modal"
+                                data-bs-target="#FormAlamat">
+                                Ubah
+                            </button>
+                        </div>
+                        <div class="col-lg-12">
+                            <h1></h1>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        @include('modal')
+            @include('modal')
 
-        @if (!empty($pesanan))
+
             <table class="mt-2">
                 <thead>
                     <tr>
@@ -110,12 +111,15 @@
                         <tr>
                             <td>
                                 <div class="cart-info">
-                                    <img src="{{ asset('assets') }}/img/product/{{ $detailPesanan->produk->gambar }}"
+                                    <img src="{{ asset('storage/' . $detailPesanan->produk->mainImage()->image) }}"
                                         alt="{{ $detailPesanan->produk->gambar }}">
                                     <div>
                                         <p>{{ $detailPesanan->produk->nama_produk }}</p>
                                         <small>Rp.
                                             {{ number_format($detailPesanan->produk->harga) }}</small>
+                                        <br>
+                                        <small>
+                                            {{ $detailPesanan->lama_pesan }} Hari</small>
 
                                         <br>
                                         <form action="/check_out/{{ $detailPesanan->id }}" method="POST">
@@ -138,84 +142,96 @@
                     </tfoot>
                 @endforeach
             </table>
-
-            <div class="total-price">
-                <table class="price">
-                    <tr class="delivery">
-                        <td><b>Pengiriman Barang</b></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" required name="lokasi" value="jasa_antar" id="jasa_antar" hidden>
-                                <label for="jasa_antar">
-                                    <div class="card mb-0">
-                                        <div class="card-body text-center">
-                                            <span>Pakai Jasa Antar</span>
-                                            <div class="float-end px-1 py-1">
-                                                {{-- <i class="fas fa-check-circle"></i> --}}
+            <form action="/konfirmasi" method="POST">
+                @csrf
+                <div class="total-price">
+                    <table class="price">
+                        <tr class="delivery">
+                            <td><b>Pengiriman Barang</b></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" required name="pickup" value="jasa_antar" id="jasa_antar" hidden>
+                                    <label for="jasa_antar">
+                                        <div class="card mb-0">
+                                            <div class="card-body text-center">
+                                                <span>Pakai Jasa Antar</span>
+                                                <div class="float-end px-1 py-1">
+                                                    {{-- <i class="fas fa-check-circle"></i> --}}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" required name="lokasi" value="tempat" id="tempat" hidden>
-                                <label for="tempat">
-                                    <div class="card mb-0">
-                                        <div class="card-body text-center">
-                                            <span>Pergi Ke Lokasi</span>
-                                            <div class="float-end px-1 py-1">
-                                                {{-- <i class="fas fa-check-circle"></i> --}}
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" required name="pickup" value="ke_tempat" id="tempat" hidden>
+                                    <label for="tempat">
+                                        <div class="card mb-0">
+                                            <div class="card-body text-center">
+                                                <span>Pergi Ke Lokasi</span>
+                                                <div class="float-end px-1 py-1">
+                                                    {{-- <i class="fas fa-check-circle"></i> --}}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><b>Jaminan</b></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <select name="jaminan" required id="jaminan" class="form-control">
-                                <option disabled selected>Jaminan</option>
-                                <option value="ktp">KTP</option>
-                                <option value="sim">SIM</option>
-                                <option value="kartu_pelajar">Kartu Pelajar</option>
-                            </select>
-                        </td>
-                    </tr>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Jaminan</b></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <select name="jaminan" required id="jaminan" class="form-control">
+                                    <option disabled selected>Jaminan</option>
+                                    <option value="ktp">KTP</option>
+                                    <option value="sim">SIM</option>
+                                    <option value="kartu_pelajar">Kartu Pelajar</option>
+                                </select>
+                            </td>
+                        </tr>
 
-                    <tr class="delivery">
-                        <td><b>Total Pembayaran</b> </td>
-                        <td>
-                            Rp. {{ number_format($pesanan->total_bayar) }}
-                        </td>
-                    </tr>
-                    <tr class="d-none " id="ongkir">
-                        {{-- <td>&nbsp;</td> --}}
-                        <td colspan="2"><i>Belum Termasuk Ongkir</i> </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <form action="/konfirmasi" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-warning check_out"> <i
-                                        class="fa-solid fa-cart-shopping"></i>Proceed
-                                    To CheckOut</button>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                        <tr class="delivery">
+                            <td><b>Total Pembayaran</b> </td>
+                            <td>
+                                Rp. {{ number_format($pesanan->total_bayar) }}
+                            </td>
+                        </tr>
+                        <tr class="d-none " id="ongkir">
+                            {{-- <td>&nbsp;</td> --}}
+                            <td colspan="2"><i>*Belum Termasuk Ongkir*</i> </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <form action="/konfirmasi" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning check_out"> <i
+                                            class="fa-solid fa-cart-shopping"></i>Proceed
+                                        To CheckOut</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
         @else
-            <h2>Belum Ada</h2>
+            <div class="container cart-page mt-1">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 text-center">
+                                <h2>Belum Ada produk di Keranjang</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endif
     </div>
 
@@ -223,7 +239,7 @@
 @endsection
 @push('script')
     <script>
-        $('[name="lokasi"]').on('change', function() {
+        $('[name="pickup"]').on('change', function() {
             if ($(this).val() == 'jasa_antar') {
                 $('#ongkir').removeClass('d-none');
             } else {
@@ -232,19 +248,19 @@
         });
     </script>
     <script>
-        $('[name="lokasi"]').on('keyup change', function() {
-            if ($(this).val() == 'lokasi') {
-                var alamat = "Jln Baros Gg H Sulaeman Desa Sukataris Kec. Karangtengah Cianjur";
-                $('#alamat').val(alamat);
-                $('#isi').attr('hidden', true)
-                $('#alamat').attr('readonly', true)
-            } else {
-                var alamat = ""
-                $('#alamat').attr('readonly', false)
-                $('#isi').attr('hidden', false)
-                $('#alamat').val(alamat);
-            }
-        });
+        // $('[name="pickup"]').on('keyup change', function() {
+        //     if ($(this).val() == 'pickup') {
+        //         var alamat = "Jln Baros Gg H Sulaeman Desa Sukataris Kec. Karangtengah Cianjur";
+        //         $('#alamat').val(alamat);
+        //         $('#isi').attr('hidden', true)
+        //         $('#alamat').attr('readonly', true)
+        //     } else {
+        //         var alamat = ""
+        //         $('#alamat').attr('readonly', false)
+        //         $('#isi').attr('hidden', false)
+        //         $('#alamat').val(alamat);
+        //     }
+        // });
 
         $('.check_out').click(function(e) {
             e.preventDefault()
@@ -295,8 +311,8 @@
             let value = $('#pilih-provinsi option:selected').text() + ", ";
 
             if (selectedOptions) {
-                $('#alamat-tabbar #kabupaten-tab').removeAttr('disabled');
-                $('#alamat-tabbar #kabupaten-tab').tab('show');
+                $('#myTab  #kabupaten-tab').removeAttr('disabled');
+                $('#myTab  #kabupaten-tab').tab('show');
                 alamatValue = "";
                 alamatValue += value;
 
@@ -334,8 +350,8 @@
             let kabupaten = $('#pilih-kabupaten option:selected').text() + ", ";
 
             if (selectedOptions) {
-                $('#alamat-tabbar #kecamatan-tab').removeAttr('disabled');
-                $('#alamat-tabbar #kecamatan-tab').tab('show');
+                $('#myTab  #kecamatan-tab').removeAttr('disabled');
+                $('#myTab  #kecamatan-tab').tab('show');
 
                 alamatValue = "";
                 alamatValue = kabupaten + provinsi;
@@ -372,8 +388,8 @@
             let Kecamatan = $('#pilih-kecamatan option:selected').text() + ", ";
 
             if (selectedOptions) {
-                $('#alamat-tabbar #desa-tab').removeAttr('disabled');
-                $('#alamat-tabbar #desa-tab').tab('show');
+                $('#myTab  #desa-tab').removeAttr('disabled');
+                $('#myTab  #desa-tab').tab('show');
 
                 alamatValue = "";
                 alamatValue = Kecamatan + kabupaten + provinsi;
@@ -411,8 +427,8 @@
             let desa = $('#pilih-desa option:selected').text() + ", ";
 
             if (selectedOptions) {
-                $('#alamat-tabbar #desa-tab').removeAttr('disabled');
-                $('#alamat-tabbar #desa-tab').tab('show');
+                $('#myTab  #desa-tab').removeAttr('disabled');
+                $('#myTab  #desa-tab').tab('show');
 
                 alamatValue = "";
                 alamatValue = desa + Kecamatan + kabupaten + provinsi;

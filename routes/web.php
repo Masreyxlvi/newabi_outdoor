@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\DashboardPesananController;
 use App\Http\Controllers\DashboardProdukController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
@@ -30,6 +31,8 @@ Route::get('/dashboard', function () {
 })->middleware('role:admin');
 
 Route::resource('/dashboard/produk', DashboardProdukController::class)->middleware('role:admin');
+Route::resource('/dashboard/pesanan', DashboardPesananController::class)->middleware('role:admin');
+Route::get('/dashboard/pesanan/faktur/{pesanan:kode_pesanan}', [DashboardPesananController::class , 'faktur'])->middleware('role:admin');
 
 // login with google 
 Route::get('/google', [GoogleController::class, 'redirect'])->name('login.google');
@@ -51,15 +54,18 @@ Route::get('/coba', function(){
 
 Route::post('/register', [RegisterController::class , 'store']);
 Route::put('/user/{user}', [UserController::class , 'editAlamat']);
+Route::get('/profile/', [UserController::class , 'profile']);
 
 // transaksi
 Route::get('/check_out', [PesananController::class , 'check_out'])->middleware('auth');
 Route::get('/riwayat', [PesananController::class , 'riwayat'])->middleware('auth');
 Route::get('/faktur/{pesanan:kode_pesanan}', [PesananController::class , 'faktur'])->middleware('auth');
+Route::get('/success', [PesananController::class , 'success'])->middleware('auth');
 Route::post('/konfirmasi', [PesananController::class , 'konfirmasi'])->middleware('auth');
+Route::get('/whatsapp', [PesananController::class , 'whatsapp'])->middleware('auth');
 Route::delete('/check_out/{id}', [PesananController::class , 'delete'])->middleware('auth');
 // all Product
-Route::get('/products', [ProduksController::class , 'index']);
+Route::get('/products/', [ProduksController::class , 'index']);
 // Categori
 Route::get('/categories', [CategoriesController::class , 'index']);
 Route::get('/categories/{kategori:nama_kategori}', [CategoriesController::class , 'show']);
@@ -74,5 +80,5 @@ Route::post('/get-kabupaten', [AlamatController::class, 'getKabupaten']);
 Route::post('/get-kecamatan', [AlamatController::class, 'getKecamatan']);
 Route::post('/get-desa', [AlamatController::class, 'getDesa']);
 
-// 
+// import
 Route::post('/dashboard/produk/import', [ProduksController::class, 'import']);

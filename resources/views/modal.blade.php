@@ -25,84 +25,67 @@
                                 <label for="name">Your Phone Number</label>
                             </div>
                         </div>
-                        <div class="col-lg-12 mt-4">
-                            <div class="accordion" id="accordionPanelsStayOpenExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                        <button class="accordion-button" style="font-size: 15px" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
-                                            aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            <input type="text" class="form-control-plaintext "
-                                                style="border: 0; outline:0;" id="alamat" name="alamat"
-                                                placeholder="Pilih Alamat Di bawah ini"
-                                                value="{{ Auth::user()->alamat }}" readonly>
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse w-100"
-                                        aria-labelledby="panelsStayOpen-headingOne">
-                                        <div class="accordion-body w-100">
-                                            <ul class="nav nav-pills mb-3 w-100" id="alamat-tabbar" role="tablist">
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="provinsi-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#tabpane-provinsi"
-                                                        type="button" role="tab" aria-controls="tabpane-provinsi"
-                                                        aria-selected="true">Provinsi</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="kabupaten-tab" data-bs-toggle="pill"
-                                                        data-bs-target="#tabpane-kabupaten" type="button"
-                                                        role="tab" aria-controls="tabpane-kabupaten"
-                                                        aria-selected="false" disabled>Kabupaten/Kota</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="kecamatan-tab" data-bs-toggle="pill"
-                                                        data-bs-target="#tabpane-kecamatan" type="button"
-                                                        role="tab" aria-controls="tabpane-kecamatan"
-                                                        aria-selected="false" disabled>Kecamatan</button>
-                                                </li>
-                                                <li class="nav-item text-dark" role="presentation">
-                                                    <button class="nav-link" id="desa-tab" data-bs-toggle="pill"
-                                                        data-bs-target="#tabpane-desa" type="button" role="tab"
-                                                        aria-controls="tabpane-desa" aria-selected="false"
-                                                        disabled>Desa</button>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content" id="pills-tabContent">
-                                                <div class="tab-pane fade show active" id="tabpane-provinsi"
-                                                    role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        id="pilih-provinsi">
-                                                        <option value="" disabled selected>Pilih Provinsi
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="tab-pane fade" id="tabpane-kabupaten" role="tabpanel"
-                                                    aria-labelledby="pills-profile-tab" tabindex="0">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        id="pilih-kabupaten">
-                                                        <option value="" disabled selected>Pilih Kabupaten
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="tab-pane fade" id="tabpane-kecamatan" role="tabpanel"
-                                                    aria-labelledby="pills-contact-tab" tabindex="0">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        id="pilih-kecamatan">
-                                                        <option value="" disabled selected>Pilih Kecamatan
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="tab-pane fade" id="tabpane-desa" role="tabpanel"
-                                                    aria-labelledby="pills-contact-tab" tabindex="0">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        id="pilih-desa">
-                                                        <option value="" disabled selected>Pilih Desa</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                        <div class="col-lg-12">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="alamat" name="alamat" readonly
+                                    value="{{ Auth::user()->alamat }}">
+                                <label for="name">Alamat</label>
+                            </div>
 
-                                        </div>
-                                    </div>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="provinsi-tab" data-bs-toggle="tab"
+                                        data-bs-target="#provinsi" type="button" role="tab"
+                                        aria-controls="provinsi" aria-selected="true">Provinsi</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="kabupaten-tab" data-bs-toggle="tab"
+                                        data-bs-target="#kabupaten" type="button" role="tab"
+                                        aria-controls="kabupaten" disabled aria-selected="false">Kabupaten</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="kecamatan-tab" data-bs-toggle="tab"
+                                        data-bs-target="#kecamatan" type="button" role="tab"
+                                        aria-controls="kecamatan" disabled aria-selected="false">Kecamatan</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="desa-tab" data-bs-toggle="tab" data-bs-target="#desa"
+                                        type="button" role="tab" aria-controls="desa" aria-selected="false"
+                                        disabled>Desa</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="provinsi" role="tabpanel"
+                                    aria-labelledby="provinsi-tab">
+                                    <select class="form-select" aria-label="Default select example" id="pilih-provinsi">
+                                        <option value="" disabled selected>Pilih
+                                            Provinsi
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="tab-pane fade" id="kabupaten" role="tabpanel"
+                                    aria-labelledby="kabupaten-tab"> <select class="form-select"
+                                        aria-label="Default select example" id="pilih-kabupaten">
+                                        <option value="" disabled selected>Pilih
+                                            Kabupaten
+                                        </option>
+                                    </select></div>
+                                <div class="tab-pane fade" id="kecamatan" role="tabpanel"
+                                    aria-labelledby="kecamatan-tab">
+                                    <select class="form-select" aria-label="Default select example"
+                                        id="pilih-kecamatan">
+                                        <option value="" disabled selected>Pilih
+                                            Kecamatan
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="tab-pane fade" id="desa" role="tabpanel"
+                                    aria-labelledby="desa-tab">
+                                    <select class="form-select" aria-label="Default select example" id="pilih-desa">
+                                        <option value="" disabled selected>Pilih
+                                            Desa
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

@@ -14,7 +14,7 @@ class UserController extends Controller
             'name' => 'required',
             'no_hp' => 'required',
             'alamat' => 'required',
-            'alamat_detail' => 'required',
+            'alamat_detail' => 'nullable',
         ]);
 
         $validate['email'] = Auth::user()->email;
@@ -24,5 +24,10 @@ class UserController extends Controller
                 ->update($validate);
 
         return redirect()->back()->with('success', "Alamat Berhasil Ditambahakan");
+    }
+
+    public function profile() 
+    {
+        return view('profile');
     }
 }

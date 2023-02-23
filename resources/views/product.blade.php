@@ -27,21 +27,15 @@
         <section id="product">
             <div class="row justify-content-between">
                 <div class="col-lg-6">
-                    <img src="{{ asset('storage/' . $produk->gambar1) }}" class="d-block w-100" alt="..."
+                    <img src="{{ asset('storage/' . $produk->mainImage()->image) }}" class="d-block w-100" alt="..."
                         id="ProductImg">
                     <div class="small-img-row">
-                        <div class="small-img-col">
-                            <img src="{{ asset('storage/' . $produk->gambar1) }}" class="d-block w-100 smallImg"
-                                alt="...">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="{{ asset('assets') }}/img/product/tenda1.jpg" class="d-block w-100 smallImg"
-                                alt="...">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="{{ asset('assets') }}/img/product/tenda2.jpg" class="d-block w-100 smallImg"
-                                alt="...">
-                        </div>
+                        @foreach ($images as $image)
+                            <div class="small-img-col">
+                                <img src="{{ asset('storage/' . $image->image) }}" class="d-block w-100 smallImg   "
+                                    alt="...">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -64,20 +58,21 @@
                                                 <label class="custom-label" for="qty">Jumlah Barang :</label>
                                                 <input type="number"
                                                     class="custom-input @error('qty') is-invalid @enderror" name="qty"
-                                                    id="qty" value="{{ old('qty') }}" placeholder="1" />
+                                                    required id="qty" value="{{ old('qty') }}" placeholder="1" />
                                             </div>
                                             <div class="controlled-form mb-4">
                                                 <label class="custom-label" for="lama_pesan">Lama Pesanan :</label>
                                                 <input type="number" class="custom-input" name="lama_pesan" id="lama_pesan"
-                                                    value="{{ old('lama_pesan') }}" placeholder="1" />
+                                                    required required value="{{ old('lama_pesan') }}" placeholder="1" />
                                                 <span id="hari">Hari</span>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="controlled-form mb-4">
-                                                <label class="custom-label" for="tgl_pesan">TAnggal Pengambilan :</label>
+                                                <label class="custom-label" for="tgl_pesan">Tanggal Pengambilan :</label>
                                                 <input type="text" readonly data-toggle="datepicker" class="custom-input"
-                                                    name="tanggal" id="tgl_pesan" value="{{ old('tgl_pesan') }}" />
+                                                    required name="tanggal" id="tgl_pesan"
+                                                    value="{{ old('tgl_pesan') }}" />
                                                 <span id="tgl"><i class="fa-solid fa-calendar-days fs-4"></i></span>
                                             </div>
                                         </div>
@@ -85,12 +80,12 @@
                                             <div class="controlled-form mb-4">
                                                 <label class="custom-label" for="tgl_pesan">Waktu Pengambilan : </label>
                                                 <input type="time" class="custom-input" name="waktu" id="time_pick"
-                                                    value="{{ old('tgl_pesan') }}" />
+                                                    required value="15:00" readonly />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="controlled-form mb-4">
-                                                <label class="custom-label" for="tgl_pesan">Tanggal Pengembalian:</label>
+                                                <label class="custom-label" for="tgl_pesan">Tanggal 'Pengembalian:</label>
                                                 <input type="text" readonly class="custom-input" name="date_drop"
                                                     value="{{ old('batas_waktu') }}" id="batas_waktu" />
                                                 <span id="tgl"><i class="fa-solid fa-calendar-days fs-4"></i></span>
@@ -99,8 +94,9 @@
                                         <div class="col-lg-6">
                                             <div class="controlled-form mb-4">
                                                 <label class="custom-label" for="tgl_pesan">Waktu Pengembalian</label>
-                                                <input type="time" readonly class="custom-input" name="time_drop"
-                                                    id="time_drop" value="{{ old('tgl_pesan') }}" />
+                                                <input type="time" class="custom-input" name="time_drop" id="time_drop"
+                                                    value="21:00" max="21:00" />
+                                                <small>Max pengembalian jam 21:00</small>
                                             </div>
                                         </div>
                                     </div>
@@ -115,8 +111,7 @@
                 </div>
 
             </div>
-    </div>
-    </section>
+        </section>
     </div>
 
     <section id="works">
@@ -131,8 +126,8 @@
                         <div class="col-lg-4 col-sm-6 mb-5">
                             <div class="image-parent">
                                 <div class="card shadow-sm">
-                                    <img src="{{ asset('storage/' . $produk->gambar1) }}" class="w-100 smallImg"
-                                        alt="" />
+                                    <img src="{{ asset('storage/' . $produk->mainImage()->image) }}"
+                                        class="w-100 smallImg" alt="" />
                                     <div class="card-body">
                                         <p class="fw-3">{{ $produk->nama_produk }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
@@ -228,15 +223,33 @@
         // produk galery
         var ProductImg = document.getElementById("ProductImg");
         var smallImg = document.getElementsByClassName("smallImg");
+        var active = document.getElementsByClassName("active");
 
-        smallImg[0].onclick = function() {
-            ProductImg.src = smallImg[0].src;
+        for (let i = 0; i < smallImg.length; i++) {
+            smallImg[0].classList.add('active');
+
+            smallImg[i].addEventListener('click', function() {
+
+                if (active.length > 0) {
+                    active[0].classList.remove('active')
+                }
+
+                this.classList.add('active')
+                ProductImg.src = this.src
+
+            })
+
         }
-        smallImg[1].onclick = function() {
-            ProductImg.src = smallImg[1].src;
-        }
-        smallImg[2].onclick = function() {
-            ProductImg.src = smallImg[2].src;
-        }
+
+
+        // smallImg[0].onclick = function() {
+        //     ProductImg.src = smallImg[0].src;
+        // }
+        // smallImg[1].onclick = function() {
+        //     ProductImg.src = smallImg[1].src;
+        // }
+        // smallImg[2].onclick = function() {
+        //     ProductImg.src = smallImg[2].src;
+        // }
     </script>
 @endpush

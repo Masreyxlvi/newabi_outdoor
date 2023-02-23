@@ -27,7 +27,7 @@
                         <tr>
                             <td>
                                 <div class="cart-info">
-                                    <img src="{{ asset('assets') }}/img/product/{{ $dp->produk->gambar }}"
+                                    <img src="{{ asset('storage/' . $dp->produk->mainImage()->image) }}"
                                         alt="{{ $dp->produk->gambar }}">
                                     <div>
                                         <p>{{ $dp->produk->nama_produk }}</p>
