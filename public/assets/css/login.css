@@ -33,7 +33,7 @@
     max-width: 300px;
     padding: 0 20px;
     position: absolute;
-    top: 130px;
+    top: 100px;
     transition: transform 1s;
 }
 .login {
@@ -64,6 +64,37 @@ form .login {
     margin: 10px 0;
 }
 
+#loginForm hr {
+    float: left;
+    width: 30%;
+    height: 1px;
+    border: none;
+    background-color: #000;
+}
+
+#loginForm p {
+    color: #000;
+    margin-top: 0;
+    width: 40%;
+    float: left;
+}
+
+#loginForm a {
+    display: block;
+    margin-top: 40px;
+}
+
+.clear {
+    clear: both;
+}
+.btn-google {
+    text-decoration: none;
+    border: 1px solid #000;
+    padding: 5px 10px;
+    color: #000;
+    display: block;
+}
+
 #loginForm {
     left: -300px;
 }
@@ -83,5 +114,6 @@ form .login {
 
 .form-container a:hover {
     font-weight: bold;
+    color: #000;
     transition: 0.5s;
 }

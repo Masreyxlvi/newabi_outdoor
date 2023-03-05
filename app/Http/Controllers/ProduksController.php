@@ -29,7 +29,8 @@ class ProduksController extends Controller
     {
         $images = $produk->images;
         return view('product', [
-            'title' => 'Relate Product',
+            'title' => 'Single Product',
+            'relate' => 'Relate Product',
             'produk' => $produk,
             'images' => $images,
             'produks' => Produk::with(['kategori', 'images', 'detail_pesanan'])->paginate(6),

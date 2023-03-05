@@ -51,7 +51,7 @@ td p {
     max-width: 450px;
     margin-top: 10px;
 }
-td:last-child {
+/* td:last-child {
     text-align: right;
 }
 td input:last-child {
@@ -59,7 +59,7 @@ td input:last-child {
 }
 th:last-child {
     text-align: right;
-}
+} */
 
 /* Product Style */
 #product {

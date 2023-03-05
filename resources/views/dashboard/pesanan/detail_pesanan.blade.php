@@ -17,7 +17,7 @@
                                 <th>Product</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
-                                <th>SubTotal</th>
+                                <th align="right">SubTotal</th>
                             </tr>
                         </thead>
                         @foreach ($pesanan->detailPesanan as $dp)
@@ -25,7 +25,7 @@
                                 <tr>
                                     <td>
                                         <div class="cart-info">
-                                            <img src="{{ asset('storage/' . $dp->produk->gambar1) }}"
+                                            <img src="{{ asset('storage/' . $dp->produk->mainImage()->image) }}"
                                                 alt="{{ $dp->produk->gambar }}" width="50px">
                                             <div>
                                                 <p>{{ $dp->produk->nama_produk }}</p>
@@ -51,15 +51,32 @@
                                             {{ number_format($dp->produk->harga) }}</small>
                                     </td>
                                     <td>{{ $dp->qty }}</td>
-                                    <td>Rp. {{ number_format($dp->jumlah_harga) }}</td>
+                                    <td align="right">Rp. {{ number_format($dp->jumlah_harga) }}</td>
                                 </tr>
                             </tbody>
                         @endforeach
                     </table>
                     <div class="total-price">
                         <table class="price">
+                            <tr align="right">
+                                @if (empty($pesanan->ongkir) && $pesanan->pickup == 'jasa_antar')
+                                    <td><b> Ongkir</b> </td>
+                                    <td>
+                                        -
+                                    </td>
+                                    <td>
+                                    </td>
+                                @else
+                                    <td><b> Ongkir</b> </td>
+                                    <td>
+                                        Rp. {{ number_format($pesanan->ongkir) }}
+                                    </td>
+                                    <td>
+                                    </td>
+                                @endif
+                            </tr>
 
-                            <tr class="delivery">
+                            <tr class="delivery" align="right">
                                 <td><b>Total Pembayaran</b> </td>
                                 <td>
                                     Rp. {{ number_format($pesanan->total_bayar) }}

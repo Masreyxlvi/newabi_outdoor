@@ -59,12 +59,18 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button type="button" class="badge badge-info" data-toggle="modal"
+                                    @if (empty($pesanan->ongkir) && $pesanan->pickup == 'jasa_antar')
+                                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                            data-target="#ongkir{{ $key }}">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    @endif
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
                                         data-target="#detailPesanan{{ $key }}">
                                         <i class="fa fa-eye"></i>
                                     </button>
-                                    <a href="/dashboard/pesanan/faktur/{{ $pesanan->kode_pesanan }}"
-                                        class="badge badge-info">
+
+                                    <a href="/dashboard/pesanan/faktur/{{ $pesanan->kode_pesanan }}" class="btn btn-info">
                                         <i class="fa fa-book" aria-hidden="true"></i>
                                     </a>
                                 </td>
@@ -77,4 +83,5 @@
     </div>
     {{-- @include('dashboard.produk.create') --}}
     @include('dashboard.pesanan.detail_pesanan')
+    @include('dashboard.pesanan.ongkir')
 @endsection

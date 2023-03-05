@@ -29,7 +29,7 @@
 
     @stack('head')
 
-    <title>NEWABI OUTDOOR | Home</title>
+    <title>NEWABI OUTDOOR | {{ $title }}</title>
 </head>
 
 <body>

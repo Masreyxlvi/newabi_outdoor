@@ -168,7 +168,7 @@
                             </td>
                             <td>
                                 <div class="form-check form-check-inline">
-                                    <input type="radio" required name="pickup" value="ke_tempat" id="tempat" hidden>
+                                    <input type="radio" required name="pickup" value="ke_lokasi" id="tempat" hidden>
                                     <label for="tempat">
                                         <div class="card mb-0">
                                             <div class="card-body text-center">

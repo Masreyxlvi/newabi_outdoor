@@ -12,6 +12,7 @@ class HomeController extends Controller
     {
         $produks = Produk::paginate(9);
         $kategoris = Kategori::all();
-        return view('home' , compact('produks', 'kategoris' ) );
+        $title = "Home";
+        return view('home' , compact('produks', 'kategoris', 'title' ) );
     }
 }

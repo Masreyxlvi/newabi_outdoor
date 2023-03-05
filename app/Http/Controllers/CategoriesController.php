@@ -13,7 +13,8 @@ class CategoriesController extends Controller
         // $produks = Produk::paginate(9);
         // $kategoris = Kategori::all();
         return view('categories', [
-            "kategoris" => Kategori::all()
+            "kategoris" => Kategori::all(),
+            'title' => 'Categories'
         ]);
     }
 

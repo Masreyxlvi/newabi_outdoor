@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pesanan;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardPesananController extends Controller
 {
@@ -92,7 +94,32 @@ class DashboardPesananController extends Controller
             'pesanan' => Pesanan::where('kode_pesanan', $pesanan->kode_pesanan)->first(),
             'title' => 'Faktur'
         );
-        $pesanan->load(['detailPesanan']);
+        $pesanan->load(['detailPesanan', 'user']);
         return view('dashboard.pesanan.faktur')->with($data);
+    }
+
+    public function cetakPdf(Pesanan $pesanan, $id)
+    {
+        $pesanan = Pesanan::find($id);
+
+        $pesanan->load(['detailPesanan', 'user']);
+
+        $pdf = PDF::loadView('dashboard.pesanan.cetakPdf', compact('pesanan', $pesanan));
+
+        return $pdf->stream();
+    }
+
+    public function diskon(Request $request, Pesanan $pesanan)
+    {
+        $pesanan = Pesanan::where('kode_pesanan', $pesanan->kode_pesanan)->where('pickup', "jasa_antar")->first();
+        // dd($pesanan);
+        $pesanan->ongkir =  $request->ongkir;
+        $pesanan->total_bayar = $pesanan->total_bayar + $request->ongkir;
+        // dd($pesanan->total_bayar);
+        
+        $pesanan->update();
+
+        return redirect()->back()->with('succes', 'Ongkir Ditambahkan');
+
     }
 }

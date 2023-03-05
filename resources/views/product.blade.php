@@ -117,7 +117,7 @@
     <section id="works">
         <div class="container">
             <div class="heading">
-                <h2>{{ $title }}</h2>
+                <h2>{{ $relate }}</h2>
                 <!-- <p class="sm-center">Berikut adalah karya-karya yang dari Kami</p> -->
             </div>
             <div class="my-works">

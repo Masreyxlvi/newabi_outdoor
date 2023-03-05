@@ -33,6 +33,8 @@ Route::get('/dashboard', function () {
 Route::resource('/dashboard/produk', DashboardProdukController::class)->middleware('role:admin');
 Route::resource('/dashboard/pesanan', DashboardPesananController::class)->middleware('role:admin');
 Route::get('/dashboard/pesanan/faktur/{pesanan:kode_pesanan}', [DashboardPesananController::class , 'faktur'])->middleware('role:admin');
+Route::get('/dashboard/pesanan/cetakPdf/{cetakPdf}', [DashboardPesananController::class , 'cetakPdf'])->middleware('role:admin');
+Route::post('/dashboard/pesanan/diskon/{pesanan:kode_pesanan}', [DashboardPesananController::class , 'diskon'])->middleware('role:admin');
 
 // login with google 
 Route::get('/google', [GoogleController::class, 'redirect'])->name('login.google');
