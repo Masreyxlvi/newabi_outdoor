@@ -4,6 +4,7 @@ use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DashboardPesananController;
 use App\Http\Controllers\DashboardProdukController;
+use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -30,6 +31,7 @@ Route::get('/dashboard', function () {
 		]);
 })->middleware('role:admin');
 
+Route::resource('/dashboard/user', DashboardUserController::class)->middleware('role:admin');
 Route::resource('/dashboard/produk', DashboardProdukController::class)->middleware('role:admin');
 Route::resource('/dashboard/pesanan', DashboardPesananController::class)->middleware('role:admin');
 Route::get('/dashboard/pesanan/faktur/{pesanan:kode_pesanan}', [DashboardPesananController::class , 'faktur'])->middleware('role:admin');
@@ -54,6 +56,7 @@ Route::get('/coba', function(){
 		return view('coba');
 });
 
+// user
 Route::post('/register', [RegisterController::class , 'store']);
 Route::put('/user/{user}', [UserController::class , 'editAlamat']);
 Route::get('/profile/', [UserController::class , 'profile']);

@@ -7,11 +7,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <nav aria-label="breadcrumb link">
-                        <ol class="breadcrumb ">
+                        <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Products</li>
                             <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
-                            {{-- <li class="breadcrumb-item active" aria-current="page">Library</li> --}}
                         </ol>
                     </nav>
                 </div>

@@ -60,12 +60,12 @@
                                 </td>
                                 <td>
                                     @if (empty($pesanan->ongkir) && $pesanan->pickup == 'jasa_antar')
-                                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
                                             data-target="#ongkir{{ $key }}">
-                                            <i class="fa fa-eye"></i>
+                                            <i class="fa fa-truck"></i>
                                         </button>
                                     @endif
-                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    <button type="button" class="btn btn-warning" data-toggle="modal"
                                         data-target="#detailPesanan{{ $key }}">
                                         <i class="fa fa-eye"></i>
                                     </button>

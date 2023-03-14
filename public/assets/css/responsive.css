@@ -205,46 +205,6 @@
         color: #eee;
     }
 
-    /* About Style */
-    #about {
-        padding: 80px 0 !important;
-    }
-
-    #about .biography {
-        /* background-color: coral !important; */
-        width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        flex-direction: column !important;
-    }
-
-    #about .bio-image {
-        width: 250px !important;
-        height: 250px !important;
-    }
-
-    #about .biography .bio-image img {
-        width: 480px !important;
-        object-fit: cover !important;
-        object-position: -125px -120px !important;
-    }
-
-    #about .biography .bio-text {
-        margin: 30px 0 !important;
-    }
-
-    #about .biography .bio-text h3 {
-        font-size: 32px !important;
-        margin-bottom: 24px !important;
-    }
-
-    #about .biography .bio-text p {
-        max-width: 312px !important;
-        font-size: 16px !important;
-        line-height: 28px !important;
-    }
-
     #product {
         padding: 20px 0;
         text-align: left;
@@ -257,111 +217,10 @@
     .cart-info p {
         display: none;
     }
-    /* Contact Style */
-    #contact {
-        padding: 100px 0 50px 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        background-image: url("../img/contact/background.png") !important;
-        background-repeat: no-repeat !important;
-        background-size: cover !important;
-        background-position: center !important;
-    }
 
-    #contact .heading h2 {
-        font-size: 32px !important;
+    .costum-textarea[readonly] {
+        height: 128px !important;
     }
-
-    #contact .heading p {
-        text-align: center !important;
-    }
-
-    #contact .card-contact .contact-item {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        padding-bottom: 0 !important;
-        /* background-color: cyan !important; */
-    }
-
-    #contact .card-contact .contact-item h4 {
-        /* background-color: red !important; */
-        width: auto !important;
-        font-size: 16px !important;
-    }
-
-    #contact .card-contact .contact-item p {
-        text-align: justify !important;
-        font-size: 14px !important;
-    }
-
-    #contact .card-contact .contact-item p .links:active {
-        text-decoration: underline !important;
-    }
-
-    #contact .card-form {
-        height: 586px !important;
-        width: 100% !important;
-        background-color: #fff !important;
-        border-radius: 24px !important;
-        position: relative !important;
-    }
-
-    #contact .card-form .accent-pills {
-        width: 180px !important;
-        height: 50px !important;
-    }
-
-    #contact .card-form .accent-pills p {
-        line-height: 50px !important;
-        font-size: 14px !important;
-    }
-
-    #contact .card-form .custom-form {
-        width: 100% !important;
-        height: 100% !important;
-        padding: 20px 0 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        /* background-color: red !important; */
-    }
-
-    #contact .card-form .custom-form .controlled-form {
-        width: 85% !important;
-        height: auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        /* background-color: coral !important; */
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-label {
-        font-size: 14px !important;
-        font-weight: 500 !important;
-        margin-bottom: 10px !important;
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-input {
-        padding: 20px !important;
-        font-size: 16px !important;
-        height: 48px !important;
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-textarea {
-        height: 138px !important;
-    }
-
-    #contact .card-form .custom-form .btn-kontak {
-        width: 45% !important;
-        font-size: 14px !important;
-        height: 42px !important;
-    }
-
-    #contact .card-form .custom-form .btn-kontak:active {
-        background-color: var(--dark-100) !important;
-        transition: 0.3s all ease-in-out !important;
-    }
-
     .tombol {
         /* margin-top: 20px; */
         display: flex;
@@ -703,104 +562,8 @@
         background-position: center;
     }
 
-    #contact .heading h2 {
-        font-size: 32px;
-    }
-
-    #contact .heading p {
-        margin-top: -5px;
-        font-size: 16px;
-    }
-
-    #contact .card-contact {
-        width: 100%;
-        height: 100%;
-    }
-
-    #contact .card-contact .contact-item {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-bottom: 0;
-        /* background-color: cyan; */
-    }
-
-    #contact .card-contact .contact-item h4 {
-        /* background-color: red; */
-        width: auto;
-        font-size: 16px;
-    }
-
-    #contact .card-contact .contact-item p {
-        text-align: justify;
-        font-size: 14px;
-    }
-
-    #contact .card-contact .contact-item p .links:active {
-        text-decoration: underline;
-    }
-
-    #contact .card-form {
-        height: 586px;
-        width: 100%;
-        background-color: #fff;
-        border-radius: 24px;
-        position: relative;
-    }
-
-    #contact .card-form .accent-pills {
-        width: 180px;
-        height: 50px;
-    }
-
-    #contact .card-form .accent-pills p {
-        line-height: 50px;
-        font-size: 14px;
-    }
-
-    #contact .card-form .custom-form {
-        width: 100%;
-        height: 100%;
-        padding: 20px 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        /* background-color: red; */
-    }
-
-    #contact .card-form .custom-form .controlled-form {
-        width: 85%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        /* background-color: coral; */
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-label {
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 10px;
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-input {
-        padding: 20px;
-        font-size: 16px;
-        height: 48px;
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-textarea {
-        height: 138px;
-    }
-
-    #contact .card-form .custom-form .btn-kontak {
-        width: 45%;
-        font-size: 14px;
-        height: 42px;
-    }
-
-    #contact .card-form .custom-form .btn-kontak:active {
-        background-color: var(--dark-100);
-        transition: 0.3s all ease-in-out;
+    .costum-textarea[readonly] {
+        height: 128px !important;
     }
 
     /* Footer Style */
@@ -1148,115 +911,8 @@
         margin-left: 0;
     }
 
-    /* Contact Style */
-    #contact {
-        padding: 100px 0 50px 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("../img/contact/background.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    }
-
-    #contact .heading h2 {
-        font-size: 32px;
-    }
-
-    #contact .heading p {
-        margin-top: -5px;
-        font-size: 16px;
-    }
-
-    #contact .card-contact {
-        width: 100%;
-        height: 100%;
-    }
-
-    #contact .card-contact .contact-item {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-bottom: 0;
-        /* background-color: cyan; */
-    }
-
-    #contact .card-contact .contact-item h4 {
-        /* background-color: red; */
-        width: auto;
-        font-size: 16px;
-    }
-
-    #contact .card-contact .contact-item p {
-        text-align: justify;
-        font-size: 14px;
-    }
-
-    #contact .card-contact .contact-item p .links:active {
-        text-decoration: underline;
-    }
-
-    #contact .card-form {
-        height: 586px;
-        width: 100%;
-        background-color: #fff;
-        border-radius: 24px;
-        position: relative;
-    }
-
-    #contact .card-form .accent-pills {
-        width: 180px;
-        height: 50px;
-    }
-
-    #contact .card-form .accent-pills p {
-        line-height: 50px;
-        font-size: 14px;
-    }
-
-    #contact .card-form .custom-form {
-        width: 100%;
-        height: 100%;
-        padding: 20px 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        /* background-color: red; */
-    }
-
-    #contact .card-form .custom-form .controlled-form {
-        width: 85%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        /* background-color: coral; */
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-label {
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 10px;
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-input {
-        padding: 20px;
-        font-size: 16px;
-        height: 48px;
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-textarea {
-        height: 138px;
-    }
-
-    #contact .card-form .custom-form .btn-kontak {
-        width: 45%;
-        font-size: 14px;
-        height: 42px;
-    }
-
-    #contact .card-form .custom-form .btn-kontak:active {
-        background-color: var(--dark-100);
-        transition: 0.3s all ease-in-out;
+    .costum-textarea[readonly] {
+        height: 128px !important;
     }
 
     /* success */
@@ -1620,121 +1276,6 @@
         margin-left: 0;
     }
 
-    /* Contact Style */
-    #contact {
-        padding: 100px 0 50px 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("../img/contact/background.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    }
-
-    #contact .sm-center {
-        text-align: center !important;
-    }
-
-    #contact .heading h2 {
-        font-size: 38px;
-    }
-
-    #contact .heading p {
-        margin-top: -5px;
-        font-size: 20px;
-    }
-
-    #contact .card-contact {
-        width: 100%;
-        height: 100%;
-    }
-
-    #contact .card-contact .contact-item {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-bottom: 0;
-        /* background-color: cyan; */
-    }
-
-    #contact .card-contact .contact-item h4 {
-        /* background-color: red; */
-        width: auto;
-        font-size: 16px;
-    }
-
-    #contact .card-contact .contact-item p {
-        text-align: justify;
-        font-size: 14px;
-    }
-
-    #contact .card-contact .contact-item p .links:active {
-        text-decoration: underline;
-    }
-
-    #contact .card-form {
-        height: 586px;
-        width: 100%;
-        background-color: #fff;
-        border-radius: 24px;
-        position: relative;
-    }
-
-    #contact .card-form .accent-pills {
-        width: 180px;
-        height: 50px;
-    }
-
-    #contact .card-form .accent-pills p {
-        line-height: 50px;
-        font-size: 14px;
-    }
-
-    #contact .card-form .custom-form {
-        width: 100%;
-        height: 100%;
-        padding: 20px 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        /* background-color: red; */
-    }
-
-    #contact .card-form .custom-form .controlled-form {
-        width: 85%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        /* background-color: coral; */
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-label {
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 10px;
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-input {
-        padding: 20px;
-        font-size: 16px;
-        height: 48px;
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-textarea {
-        height: 138px;
-    }
-
-    #contact .card-form .custom-form .btn-kontak {
-        width: 45%;
-        font-size: 14px;
-        height: 42px;
-    }
-
-    #contact .card-form .custom-form .btn-kontak:active {
-        background-color: var(--dark-100);
-        transition: 0.3s all ease-in-out;
-    }
-
     /* Footer Style */
     footer {
         height: 200px;
@@ -1878,7 +1419,7 @@
 
     /* HERO */
     #hero {
-        padding: 120px 4px;
+        padding: 40px 4px;
     }
 
     #hero .hero-text {
@@ -1909,7 +1450,7 @@
         color: #fff;
         width: 50%;
         height: 100%;
-        padding: 14px 20px;
+        padding: 8px 15px;
         font-size: 18px;
     }
 
@@ -2076,119 +1617,8 @@
         margin-bottom: 20px;
     }
 
-    /* Contact Style */
-    #contact {
-        padding: 100px 0 50px 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("../img/contact/background.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    }
-
-    #contact .sm-center {
-        text-align: center !important;
-    }
-
-    #contact .heading h2 {
-        font-size: 38px;
-    }
-
-    #contact .heading p {
-        margin-top: -5px;
-        font-size: 20px;
-    }
-
-    #contact .card-contact {
-        width: 100%;
-        height: 100%;
-    }
-
-    #contact .card-contact .contact-item {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-bottom: 0;
-        /* background-color: cyan; */
-    }
-
-    #contact .card-contact .contact-item h4 {
-        /* background-color: red; */
-        width: auto;
-        font-size: 16px;
-    }
-
-    #contact .card-contact .contact-item p {
-        text-align: justify;
-        font-size: 14px;
-    }
-
-    #contact .card-contact .contact-item p .links:active {
-        text-decoration: underline;
-    }
-
-    #contact .card-form {
-        height: 586px;
-        width: 100%;
-        background-color: #fff;
-        border-radius: 24px;
-        position: relative;
-    }
-
-    #contact .card-form .accent-pills {
-        width: 180px;
-        height: 50px;
-    }
-
-    #contact .card-form .accent-pills p {
-        line-height: 50px;
-        font-size: 14px;
-    }
-
-    #contact .card-form .custom-form {
-        width: 100%;
-        height: 100%;
-        padding: 20px 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        /* background-color: red; */
-    }
-
-    #contact .card-form .custom-form .controlled-form {
-        width: 85%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        /* background-color: coral; */
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-label {
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 10px;
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-input {
-        padding: 20px;
-        font-size: 16px;
-        height: 48px;
-    }
-
-    #contact .card-form .custom-form .controlled-form .custom-textarea {
-        height: 138px;
-    }
-
-    #contact .card-form .custom-form .btn-kontak {
-        width: 45%;
-        font-size: 14px;
-        height: 42px;
-    }
-
-    #contact .card-form .custom-form .btn-kontak:active {
-        background-color: var(--dark-100);
-        transition: 0.3s all ease-in-out;
+    .costum-textarea[readonly] {
+        height: 128px !important;
     }
 
     /* Footer Style */

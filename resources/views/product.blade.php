@@ -58,12 +58,12 @@
                                                 <label class="custom-label" for="qty">Jumlah Barang :</label>
                                                 <input type="number"
                                                     class="custom-input @error('qty') is-invalid @enderror" name="qty"
-                                                    required id="qty" value="{{ old('qty') }}" placeholder="1" />
+                                                    required id="qty" value="1" />
                                             </div>
                                             <div class="controlled-form mb-4">
-                                                <label class="custom-label" for="lama_pesan">Lama Pesanan :</label>
+                                                <label class="custom-label" for="lama_pesan">Lama Memesan :</label>
                                                 <input type="number" class="custom-input" name="lama_pesan" id="lama_pesan"
-                                                    required required value="{{ old('lama_pesan') }}" placeholder="1" />
+                                                    required required value="1" />
                                                 <span id="hari">Hari</span>
                                             </div>
                                         </div>
@@ -71,8 +71,7 @@
                                             <div class="controlled-form mb-4">
                                                 <label class="custom-label" for="tgl_pesan">Tanggal Pengambilan :</label>
                                                 <input type="text" readonly data-toggle="datepicker" class="custom-input"
-                                                    required name="tanggal" id="tgl_pesan"
-                                                    value="{{ old('tgl_pesan') }}" />
+                                                    required name="tanggal" id="tgl_pesan" value="{{ old('tgl_pesan') }}" />
                                                 <span id="tgl"><i class="fa-solid fa-calendar-days fs-4"></i></span>
                                             </div>
                                         </div>

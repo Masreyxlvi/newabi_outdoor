@@ -21,7 +21,7 @@ input[name="pickup"]:checked + label i {
 }
 
 input[name="pickup"]:checked + label .card {
-    border: 2px solid #17a2b8;
-    background-color: rgba(23, 164, 186, 0.1);
-    color: #17a2b8;
+    border: 2px solid #00a2ea;
+    background-color: rgb(0, 162, 234, 0.1);
+    color: #00a2ea;
 }

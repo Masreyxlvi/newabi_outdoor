@@ -57,16 +57,18 @@
     @endif
 
     <div class="container cart-page">
-        <div class="row">
-            <div class="col-lg-10">
-                <h2>
+        <div class="row justify-content-between">
+            <div class="col-lg-10 col-12 d-flex align-items-start flex-column">
+                <h2 class="text-end mb-3">
                     <i class="fa-solid fa-cart-shopping"></i> <span>CheckOut</span>
                 </h2>
             </div>
-            <div class="col-lg-2">
-                <a href="/products" class="btn btn-outline-dark "><i class="bi bi-box-arrow-left"></i> Back To Shop</a>
+            <div class="col-lg-2 col-12 d-flex align-items-end flex-column">
+                <a href="/products" class="btn btn-outline-dark mb-3"><i class="bi bi-box-arrow-left"></i> Back To Shop</a>
             </div>
         </div>
+
+
         @if (!empty($pesanan))
             <div class="card mt-4">
                 <div class="card-header text-danger">
@@ -76,16 +78,28 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <h5>{{ Auth::user()->name }}</h5>
-                            <p>(+62) {{ Auth::user()->no_hp }}</p>
+                            @if (empty(Auth::user()->no_hp))
+                                <p>(+62) <i>Harap Isi No Hp </i></p>
+                            @else
+                                <p>(+62) {{ Auth::user()->no_hp }}</p>
+                            @endif
                         </div>
                         <div class="col-lg-7">
-                            <p>{{ Auth::user()->alamat_detail }}, {{ Auth::user()->alamat }}</p>
+                            @if (empty(Auth::user()->alamat))
+                                <p><i>Harap Isi Alamat Untuk Melanjutkan Pemesanan</i></p>
+                            @else
+                                <p>{{ Auth::user()->alamat_detail }}, {{ Auth::user()->alamat }}</p>
+                            @endif
                         </div>
                         <div class="col-lg-2 text-end">
 
                             <button type="button" class="border-0 text-danger bg-light" data-bs-toggle="modal"
                                 data-bs-target="#FormAlamat">
-                                Ubah
+                                @if (empty(Auth::user()->no_hp || Auth::user()->alamat))
+                                    Lengkapi
+                                @else
+                                    Ubah
+                                @endif
                             </button>
                         </div>
                         <div class="col-lg-12">
@@ -189,7 +203,6 @@
                         <tr>
                             <td colspan="2">
                                 <select name="jaminan" required id="jaminan" class="form-control">
-                                    <option disabled selected>Jaminan</option>
                                     <option value="ktp">KTP</option>
                                     <option value="sim">SIM</option>
                                     <option value="kartu_pelajar">Kartu Pelajar</option>
@@ -209,12 +222,9 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <form action="/konfirmasi" method="post">
-                                    @csrf
-                                    <button type="submit" class="btn btn-warning check_out"> <i
-                                            class="fa-solid fa-cart-shopping"></i>Proceed
-                                        To CheckOut</button>
-                                </form>
+                                <button type="submit" class="btn btn-dark"> <i
+                                        class="fa-solid fa-cart-shopping"></i>Proceed
+                                    To CheckOut</button>
                             </td>
                         </tr>
                     </table>
@@ -234,8 +244,6 @@
             </div>
         @endif
     </div>
-
-
 @endsection
 @push('script')
     <script>
@@ -248,20 +256,6 @@
         });
     </script>
     <script>
-        // $('[name="pickup"]').on('keyup change', function() {
-        //     if ($(this).val() == 'pickup') {
-        //         var alamat = "Jln Baros Gg H Sulaeman Desa Sukataris Kec. Karangtengah Cianjur";
-        //         $('#alamat').val(alamat);
-        //         $('#isi').attr('hidden', true)
-        //         $('#alamat').attr('readonly', true)
-        //     } else {
-        //         var alamat = ""
-        //         $('#alamat').attr('readonly', false)
-        //         $('#isi').attr('hidden', false)
-        //         $('#alamat').val(alamat);
-        //     }
-        // });
-
         $('.check_out').click(function(e) {
             e.preventDefault()
             let data = $(this).closest('form').find('buttom').text()
@@ -329,7 +323,8 @@
                     success: function(kabupaten) {
                         console.log(kabupaten);
 
-                        $('#pilih-kabupaten').html("");
+                        $('#pilih-kabupaten').html(
+                            "<option disabled selected>Pilih Kabupaten</option>");
 
 
                         let value = kabupaten.regencies;
@@ -369,7 +364,8 @@
                     success: function(data) {
                         console.log(data);
 
-                        $('#pilih-kecamatan').html("");
+                        $('#pilih-kecamatan').html(
+                            "<option disabled selected>Pilih Kecamatan</option>");
                         let value = data.districts;
 
                         for (let i = 0; i < value.length; i++) {
@@ -407,7 +403,7 @@
                     success: function(data) {
                         console.log(data);
 
-                        $('#pilih-desa').html("");
+                        $('#pilih-desa').html("<option disabled selected>Pilih Desa</option>");
                         let value = data.villages;
 
                         for (let i = 0; i < value.length; i++) {

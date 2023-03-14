@@ -6,6 +6,7 @@
     <title>Success Page</title>
     <link rel="stylesheet" href="{{ asset('assets') }}/css/success.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
     <style>
 
     </style>
@@ -15,8 +16,8 @@
     <div class="container">
         <div class="success-box animate">
             <div class="success-icon animate-check">&#10004;</div>
-            <div class="success-title">Pesanan Diproses!</div>
-            <div class="success-description">Your request has been processed.</div>
+            <div class="success-title">Pesanan Sukses</div>
+            <div class="success-description">Pesanan Anda sedang Diproses.</div>
             <a href="/products" class="back-button"><i class="bi bi-box-arrow-left"></i> Kembali Memesan</a>
             <button class="success-button" onclick="whatsapp()" id="wa"><i class="bi bi-whatsapp"></i> Kirim
                 Pesan

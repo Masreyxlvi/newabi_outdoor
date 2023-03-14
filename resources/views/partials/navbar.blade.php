@@ -8,7 +8,6 @@
             <div class="navigation-links">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="#services">Services</a></li>
                     <li><a href="/products">Products</a></li>
                     <li><a href="/categories">Categories</a></li>
                     <li><a href="/contact">Contact</a></li>
@@ -17,7 +16,7 @@
             <div class="navigation-social-media">
                 @auth
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" style="opacity: 0; y:-100; text-transform: uppercase;">
+                        aria-expanded="false" text-transform: uppercase;">
                         {{ auth()->user()->name }}
                     </a>
                     <ul class="dropdown-menu">
@@ -39,7 +38,7 @@
                         </li>
                     </ul>
                 @else
-                    <a href="/login" class="login" style="opacity: 0; y:-100;">Login Now</a>
+                    <a href="/login" class="login">Login Now</a>
                 @endauth
             </div>
         </div>

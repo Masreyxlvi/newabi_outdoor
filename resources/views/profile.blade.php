@@ -27,115 +27,135 @@
     @endif
     <div class="container-sm">
         <section id="profile">
-            <h2><i class="bi bi-person-circle"></i> My Profile</h2>
+            <h2 class="text-center"><i class="bi bi-person-circle"></i> My Profile</h2>
             <div class="card">
                 <div class="card-body">
-                    <div class="row justify-content-between">
-                        <div class="col-lg-3">
-                            <div class="card card-body shadow">
-                                <img src="{{ asset('assets') }}/img/icons/user.png" alt="" width="100px"
-                                    class="rounded mx-auto d-block">
-                            </div>
+                    <div class="row justify-content-center">
+
+                        <div class="mb-3">
+                            <button type="button" id="edit" class="btn btn-dark">Edit Profile</button>
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-12">
                             <div class="card card-body">
                                 <form action="/user/{{ Auth::user()->id }}" method="post">
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" name="name" id="name"
-                                                    placeholder="Nama Lengkap" value="{{ Auth::user()->name }}">
-                                                <label for="name">Nama Lengkap</label>
+                                        <div class="col-lg-12">
+                                            <div class="row mb-3">
+                                                <label for="name" class="col-sm-4 col-form-label custom-label">Nama
+                                                    :</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" id="name" name="name"
+                                                        class="form-control-plaintext costum-input" readonly
+                                                        value="{{ Auth::user()->name }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="number" class="form-control" id="no_hp" name="no_hp"
-                                                    placeholder="8131327" value="{{ Auth::user()->no_hp }}">
-                                                <label for="name">No Handphone</label>
+                                            <div class="row mb-3">
+                                                <label for="name" class="col-sm-4 col-form-label custom-label">No Hand
+                                                    Phone
+                                                    :</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" id="no_hp" name="no_hp"
+                                                        class="form-control-plaintext costum-input" readonly
+                                                        value="{{ Auth::user()->no_hp }}">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="alamat" name="alamat"
-                                                    readonly value="{{ Auth::user()->alamat }}">
-                                                <label for="name">Alamat</label>
+                                            <div class="row mb-3">
+                                                <label for="name" class="col-sm-4 col-form-label custom-label">Alamat
+                                                    :</label>
+                                                <div class="col-sm-8">
+                                                    <textarea type="text" id="alamat" name="alamat" class="form-control-plaintext costum-input" readonly
+                                                        value="">{{ Auth::user()->alamat }}</textarea>
+                                                </div>
                                             </div>
+                                            <div class="row justify-content-end mb-3">
+                                                <div id="inputAlamat" class="d-none col-lg-8">
+                                                    <ul class="nav nav-tabs justify-content-center flex-column flex-sm-row nav-justified"
+                                                        id="myTab" role="tablist">
+                                                        <li class="nav-item " role="presentation">
+                                                            <button class="nav-link active" id="provinsi-tab"
+                                                                data-bs-toggle="tab" data-bs-target="#provinsi"
+                                                                type="button" role="tab" aria-controls="provinsi"
+                                                                aria-selected="true">Provinsi</button>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <button class="nav-link" id="kabupaten-tab" data-bs-toggle="tab"
+                                                                data-bs-target="#kabupaten" type="button" role="tab"
+                                                                aria-controls="kabupaten" disabled aria-selected="false"
+                                                                style="cursor:not-allowed">Kabupaten</button>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <button class="nav-link" id="kecamatan-tab" data-bs-toggle="tab"
+                                                                data-bs-target="#kecamatan" type="button" role="tab"
+                                                                aria-controls="kecamatan" disabled aria-selected="false"
+                                                                style="cursor:not-allowed">Kecamatan</button>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <button class="nav-link" id="desa-tab" data-bs-toggle="tab"
+                                                                data-bs-target="#desa" type="button" role="tab"
+                                                                aria-controls="desa" aria-selected="false" disabled
+                                                                style="cursor:not-allowed">Desa</button>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content" id="myTabContent">
+                                                        <div class="tab-pane fade show active" id="provinsi"
+                                                            role="tabpanel" aria-labelledby="provinsi-tab">
+                                                            <select class="form-select"
+                                                                aria-label="Default select example" id="pilih-provinsi">
+                                                                <option value="" disabled selected>Pilih
+                                                                    Provinsi
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="kabupaten" role="tabpanel"
+                                                            aria-labelledby="kabupaten-tab"> <select class="form-select"
+                                                                aria-label="Default select example" id="pilih-kabupaten">
+                                                                <option value="" disabled selected>Pilih
+                                                                    Kabupaten
+                                                                </option>
+                                                            </select></div>
+                                                        <div class="tab-pane fade" id="kecamatan" role="tabpanel"
+                                                            aria-labelledby="kecamatan-tab">
+                                                            <select class="form-select"
+                                                                aria-label="Default select example" id="pilih-kecamatan">
+                                                                <option value="" disabled selected>Pilih
+                                                                    Kecamatan
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="desa" role="tabpanel"
+                                                            aria-labelledby="desa-tab">
+                                                            <select class="form-select"
+                                                                aria-label="Default select example" id="pilih-desa">
+                                                                <option value="" disabled selected>Pilih
+                                                                    Desa
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
 
-                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="provinsi-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#provinsi" type="button" role="tab"
-                                                        aria-controls="provinsi" aria-selected="true">Provinsi</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="kabupaten-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#kabupaten" type="button" role="tab"
-                                                        aria-controls="kabupaten" disabled
-                                                        aria-selected="false">Kabupaten</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="kecamatan-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#kecamatan" type="button" role="tab"
-                                                        aria-controls="kecamatan" disabled
-                                                        aria-selected="false">Kecamatan</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="desa-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#desa" type="button" role="tab"
-                                                        aria-controls="desa" aria-selected="false" disabled>Desa</button>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content" id="myTabContent">
-                                                <div class="tab-pane fade show active" id="provinsi" role="tabpanel"
-                                                    aria-labelledby="provinsi-tab">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        id="pilih-provinsi">
-                                                        <option value="" disabled selected>Pilih
-                                                            Provinsi
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="tab-pane fade" id="kabupaten" role="tabpanel"
-                                                    aria-labelledby="kabupaten-tab"> <select class="form-select"
-                                                        aria-label="Default select example" id="pilih-kabupaten">
-                                                        <option value="" disabled selected>Pilih
-                                                            Kabupaten
-                                                        </option>
-                                                    </select></div>
-                                                <div class="tab-pane fade" id="kecamatan" role="tabpanel"
-                                                    aria-labelledby="kecamatan-tab">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        id="pilih-kecamatan">
-                                                        <option value="" disabled selected>Pilih
-                                                            Kecamatan
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="tab-pane fade" id="desa" role="tabpanel"
-                                                    aria-labelledby="desa-tab">
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        id="pilih-desa">
-                                                        <option value="" disabled selected>Pilih
-                                                            Desa
-                                                        </option>
-                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 mt-4">
-                                            <div class="form-floating mb-3">
-                                                <textarea name="alamat_detail" id="" class="form-control"
-                                                    placeholder="Detail lainnya (Nama jalan Rt Rw No Rumah)"> {{ Auth::user()->alamat_detail }}</textarea>
-                                                <label for="name">Alamat Detail</label>
+                                        <div class="col-lg-12 addres">
+                                            <div class="row mb-3">
+                                                <label for="name" class="col-sm-4 col-form-label custom-label">Alamat
+                                                    Detail
+                                                    :</label>
+                                                <div class="col-sm-8">
+                                                    <textarea type="text" id="alamat_detail" name="alamat_detail" class="form-control-plaintext costum-input"
+                                                        readonly name="alamat_detail" value="">{{ Auth::user()->alamat_detail }}</textarea>
+                                                </div>
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-end">
-                                        <button type="submit" class="btn btn-primary">Edit Profile</button>
+                                        <button type="submit" id="submit" class="btn btn-dark d-none">Submit
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -183,6 +203,7 @@
 
             if (selectedOptions) {
                 $('#myTab #kabupaten-tab').removeAttr('disabled');
+                $('#myTab #kabupaten-tab').css('cursor', 'pointer');
                 $('#myTab #kabupaten-tab').tab('show');
                 alamatValue = "";
                 alamatValue += value;
@@ -222,6 +243,7 @@
 
             if (selectedOptions) {
                 $('#myTab #kecamatan-tab').removeAttr('disabled');
+                $('#myTab #kecamatan-tab').css('cursor', 'pointer');
                 $('#myTab #kecamatan-tab').tab('show');
 
                 alamatValue = "";
@@ -299,6 +321,7 @@
 
             if (selectedOptions) {
                 $('#myTab #desa-tab').removeAttr('disabled');
+                $('#myTab #desa-tab').css('cursor', 'pointer');
                 $('#myTab #desa-tab').tab('show');
 
                 alamatValue = "";
@@ -307,5 +330,17 @@
                 $('#alamat').val(alamatValue);
             }
         })
+
+
+        $('#edit').on('click', function() {
+            // alert('hello')
+            $('#name').prop('readonly', false);
+            $('#no_hp').prop('readonly', false);
+            $('#inputAlamat').removeClass('d-none');
+            $('#submit').removeClass('d-none');
+            $('#alamat_detail').prop('readonly', false);
+            $('#addres').addClass('mt-4');
+            // $('#inputAlamat').addClass('d-block');
+        });
     </script>
 @endpush

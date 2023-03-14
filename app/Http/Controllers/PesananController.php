@@ -132,7 +132,7 @@ class PesananController extends Controller
         $pesanan->status = "sudah_checkout";
         $pesanan->pickup = $request->pickup;
         $pesanan->jaminan = $request->jaminan;
-        // dd($pesanan);    
+ 
         $pesanan->update();
 
         $detail_pesanans = DetailPesanan::where('pesanan_id', $pesanan_id)->get();

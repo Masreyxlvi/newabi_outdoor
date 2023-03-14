@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $produks = Produk::paginate(9);
+        $produks = Produk::paginate(6);
         $kategoris = Kategori::all();
         $title = "Home";
         return view('home' , compact('produks', 'kategoris', 'title' ) );

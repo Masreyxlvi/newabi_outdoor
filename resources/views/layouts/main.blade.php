@@ -91,42 +91,23 @@
     <script>
         gsap.registerPlugin(TextPlugin);
         // navbar
-        gsap.from('.navigation-brand a', {
-            duration: 1,
-            y: '-100%',
-            opacity: 0,
-            ease: 'bounce'
-        });
+        // hero
         gsap.to('.hero-text h1', {
             duration: 1,
             delay: 1,
             text: 'NEWABI OUTDOOR'
         });
-        gsap.from('.navigation-links ul', {
-            duration: 1,
-            delay: 1.5,
-            y: '-100%',
-            opacity: 0,
-            ease: 'elastic'
-        });
-        gsap.to('.navigation-social-media a', {
-            duration: 1,
-            delay: 2,
-            y: 0,
-            opacity: 100,
-            ease: 'elastic'
-        });
 
         gsap.from('.hero-text p', {
             duration: 1,
-            delay: 2.3,
+            delay: 2.7,
             x: -100,
             opacity: 0,
             ease: 'power4'
         })
         gsap.from('.hero-banner', {
             duration: 1.2,
-            delay: 2.7,
+            delay: 2.3,
             x: 100,
             opacity: 0,
             ease: 'elastic'
